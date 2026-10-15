@@ -9,6 +9,10 @@ public class EcoSortApplication extends Application {
     @Override
     public void start(Stage stage) {
         BorderPane root = new BorderPane();
+
+        InteractiveMap interactiveMap = new InteractiveMap();
+        root.setCenter(interactiveMap);
+
         Scene scene = new Scene(root, 1920, 1080);
         stage.setTitle("EcoSort Application");
         stage.setScene(scene);
