@@ -32,14 +32,14 @@ public class InteractiveMap extends BorderPane {
             {340, 387, 340, 176, 368, 176, 368, 169, 379, 169, 379, 176, 431, 176, 431, 387}
     };
     private static final double[][] Coordonate_bloc_B = {
-            {376, 387, 431, 387, 431, 394, 466, 394, 466, 447, 484, 447, 484, 467, 571, 467, 571, 423, 580, 423, 580, 370, 574, 370, 574, 275, 571, 275, 571, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 399, 688, 399, 688, 414, 684, 414, 684, 429, 768, 429, 768, 307, 869, 307, 869, 456, 827, 456, 827, 462, 845, 462, 845, 534, 765, 534, 765, 545, 725, 545, 725, 534, 636, 534, 636, 545, 598, 545, 598, 533, 520, 533, 520, 545, 483, 545, 483, 534, 400, 534, 400, 489, 376, 489},
-            {376, 387, 431, 387, 431, 394, 466, 394, 466, 447, 484, 447, 484, 467, 571, 467, 571, 423, 580, 423, 580, 370, 574, 370, 574, 275, 571, 275, 571, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 399, 688, 399, 688, 414, 684, 414, 684, 429, 768, 429, 768, 307, 869, 307, 869, 456, 827, 456, 827, 462, 845, 462, 845, 534, 765, 534, 765, 545, 725, 545, 725, 534, 636, 534, 636, 545, 598, 545, 598, 533, 520, 533, 520, 545, 483, 545, 483, 534, 400, 534, 400, 489, 376, 489},
-            {376, 387, 431, 387, 431, 394, 466, 394, 466, 447, 484, 447, 484, 467, 571, 467, 571, 423, 580, 423, 580, 370, 574, 370, 574, 275, 571, 275, 571, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 399, 688, 399, 688, 414, 684, 414, 684, 429, 768, 429, 768, 272, 751, 272, 751, 251, 869, 251, 869, 454, 810, 454, 810, 462, 845, 462, 845, 534, 765, 534, 765, 545, 725, 545, 725, 534, 636, 534, 636, 545, 598, 545, 598, 533, 520, 533, 520, 545, 483, 545, 483, 534, 400, 534, 400, 489, 376, 489}
+            {769, 307, 869, 307, 869, 122, 884, 122, 884, 5, 660, 5, 660, 154, 769, 154, 769, 251, 751, 251, 751, 272, 769, 272},
+            {769, 380, 810, 380, 810, 251, 869, 251, 869, 122, 884, 122, 884, 5, 660, 5, 660, 154, 769, 154, 769, 251, 751, 251, 751, 272, 769, 272},
+            {769, 437, 798, 437, 798, 454, 869, 454, 869, 251, 869, 122, 884, 122, 884, 5, 660, 5, 660, 154, 769, 154, 769, 251, 751, 251, 751, 272, 769, 272}
     };
     private static final double[][] Coordonate_bloc_C = {
-            {769, 247, 869, 247, 869, 122, 884, 122, 884, 5, 660, 5, 660, 154, 769, 154},
-            {769, 247, 869, 247, 869, 122, 884, 122, 884, 5, 660, 5, 660, 154, 769, 154},
-            {769, 247, 869, 247, 869, 122, 884, 122, 884, 5, 660, 5, 660, 154, 769, 154}
+            {376, 387, 431, 387, 431, 394, 466, 394, 466, 447, 484, 447, 484, 467, 571, 467, 571, 423, 580, 423, 580, 370, 574, 370, 574, 272, 572, 272, 572, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 399, 688, 399, 688, 414, 684, 414, 684, 429, 769, 429, 769, 307, 869, 307, 869, 456, 827, 456, 827, 462, 845, 462, 845, 534, 765, 534, 765, 545, 725, 545, 725, 534, 636, 534, 636, 545, 599, 545, 599, 533, 520, 533, 520, 545, 483, 545, 483, 534, 400, 534, 400, 490, 376, 490},
+            {376, 387, 431, 387, 431, 394, 466, 394, 466, 447, 484, 447, 484, 467, 571, 467, 571, 423, 580, 423, 580, 370, 574, 370, 574, 275, 571, 275, 571, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 399, 688, 399, 688, 414, 684, 414, 684, 429, 769, 429, 769, 380, 810, 379, 810, 251, 869, 251, 869, 456, 827, 456, 827, 462, 845, 462, 845, 534, 765, 534, 765, 545, 725, 545, 725, 534, 636, 534, 636, 545, 599, 545, 599, 533, 520, 533, 520, 545, 483, 545, 483, 534, 400, 534, 400, 490, 376, 490},
+            {376, 387, 431, 387, 431, 394, 466, 394, 466, 447, 484, 447, 484, 467, 571, 467, 571, 423, 580, 423, 580, 370, 574, 370, 574, 275, 571, 275, 571, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 399, 688, 399, 688, 414, 684, 414, 684, 429, 769, 429, 769, 437, 798, 437, 798, 454, 810, 454, 810, 462, 845, 462, 845, 534, 765, 534, 765, 545, 725, 545, 725, 534, 636, 534, 636, 545, 599, 545, 599, 533, 520, 533, 520, 545, 483, 545, 483, 534, 400, 534, 400, 490, 376, 490}
     };
     private static final double[][] Coordonate_bloc_D = {
             {235, 421, 235, 240, 238, 240, 255, 127, 272, 127, 263, 209, 276, 239, 276, 421},
@@ -78,10 +78,21 @@ public class InteractiveMap extends BorderPane {
             if (i == 0) {
                 asambleazaBlocA1(bloc_A[i]);
                 asambleazaBlocB1(bloc_B[i]);
+                asambleazaBlocC1(bloc_C[i]);
+                asambleazaBlocD1(bloc_D[i]);
+                asambleazaBlocE1(bloc_E[i]);
             } else if (i == 1) {
                 asambleazaBlocA2(bloc_A[i]);
+                asambleazaBlocB2(bloc_B[i]);
+                asambleazaBlocC2(bloc_C[i]);
+                asambleazaBlocD2(bloc_D[i]);
+                asambleazaBlocE2(bloc_E[i]);
             } else {
                 asambleazaBlocA3(bloc_A[i]);
+                asambleazaBlocB3(bloc_B[i]);
+                asambleazaBlocC3(bloc_C[i]);
+                asambleazaBlocD3(bloc_D[i]);
+                asambleazaBlocE3(bloc_E[i]);
             }
         }
 
@@ -140,100 +151,292 @@ public class InteractiveMap extends BorderPane {
 
         afiseazaEtaj(1);
     }
-        private void asambleazaBlocA1(Pane bloc) {
-            adaugaIncapere(bloc, null, "A doua scară, Etaj 1, A", 340, 176, 39, 19);
-            adaugaIncaperePoligon(bloc, "WC", "WC-B-A1", Color.WHITE, Color.BLACK, 340, 195, 379, 195, 379, 206, 364, 206, 364, 214, 340, 214);
-            adaugaIncaperePoligon(bloc, null, "WC-Persoane-cu-necesități-speciale-A1", Color.WHITE, Color.BLACK, 364, 206, 379, 206, 379, 216, 364, 216);
-            adaugaIncaperePoligon(bloc, "WC", "WC-F-A1", Color.WHITE, Color.BLACK, 340, 214, 364, 214, 364, 216, 379, 216, 379, 232, 340, 232);
-            adaugaIncapere(bloc, "124", "Matematică", 340, 232, 39, 51);
-            adaugaIncapere(bloc, "122", "Matematică", 340, 283, 39, 51);
-            adaugaIncapere(bloc, "120", "Metodist Olga Jumbei", 340, 335, 39, 33);
-            adaugaIncapere(bloc, null, "Prima scară, Etaj 1, A", 340, 368, 39, 19);
-            adaugaIncapere(bloc, "123", "Matematică", 393, 176, 39, 54);
-            adaugaIncapere(bloc, "121", "Limba și Literatura Română", 393, 230, 39, 52);
-            adaugaIncapere(bloc, "119", "Istorie", 393, 282, 39, 54);
-            adaugaIncapere(bloc, "117", "Istorie", 393, 336, 39, 51);
-        }
 
-        private void asambleazaBlocA2(Pane bloc) {
-            adaugaIncapere(bloc, null, "A doua scară, Etaj 2, A", 340, 176, 39, 19);
-            adaugaIncaperePoligon(bloc, "WC", "WC-B-A2", Color.WHITE, Color.BLACK, 340, 195, 379, 195, 379, 206, 364, 206, 364, 214, 340, 214);
-            adaugaIncaperePoligon(bloc, null, "WC-Persoane-cu-necesități-speciale-A2", Color.WHITE, Color.BLACK, 364, 206, 379, 206, 379, 216, 364, 216);
-            adaugaIncaperePoligon(bloc, "WC", "WC-F-A2", Color.WHITE, Color.BLACK, 340, 214, 364, 214, 364, 216, 379, 216, 379, 232, 340, 232);
-            adaugaIncapere(bloc, "224", "Limba și Literatura Română", 340, 232, 39, 51);
-            adaugaIncapere(bloc, "222", "Limba și Literatura Română", 340, 283, 39, 51);
-            adaugaIncapere(bloc, "220", "Limba franceză", 340, 335, 39, 33);
-            adaugaIncapere(bloc, null, "Prima scară, Etaj 2, A", 340, 368, 39, 19);
-            adaugaIncapere(bloc, "226", "Limba engleză", 393, 176, 39, 38);
-            adaugaIncapere(bloc, "225", "Servicii admnistrative", 393, 214, 39, 51);
-            adaugaIncapere(bloc, "223", "Secția didactică 4 (Șef: Vasile Melnic)", 393, 265, 39, 17);
-            adaugaIncapere(bloc, "221", "Servicii administrative", 393, 282, 39, 53);
-            adaugaIncapere(bloc, "219", "Istorie", 393, 335, 39, 52);
-        }
+    private void asambleazaBlocA1(Pane bloc) {
+        adaugaIncapere(bloc, null, "A doua scară, Etaj 1, A", 340, 176, 39, 19);
+        adaugaIncaperePoligon(bloc, "WC", "WC-B-A1", Color.WHITE, Color.BLACK, 340, 195, 379, 195, 379, 206, 364, 206, 364, 214, 340, 214);
+        adaugaIncaperePoligon(bloc, null, "WC-Persoane-cu-necesități-speciale-A1", Color.WHITE, Color.BLACK, 364, 206, 379, 206, 379, 216, 364, 216);
+        adaugaIncaperePoligon(bloc, "WC", "WC-F-A1", Color.WHITE, Color.BLACK, 340, 214, 364, 214, 364, 216, 379, 216, 379, 232, 340, 232);
+        adaugaIncapere(bloc, "124", "Matematică", 340, 232, 39, 51);
+        adaugaIncapere(bloc, "122", "Matematică", 340, 283, 39, 51);
+        adaugaIncapere(bloc, "120", "Metodist Olga Jumbei", 340, 335, 39, 33);
+        adaugaIncapere(bloc, null, "Prima scară, Etaj 1, A", 340, 368, 39, 19);
+        adaugaIncapere(bloc, "123", "Matematică", 393, 176, 39, 54);
+        adaugaIncapere(bloc, "121", "Limba și Literatura Română", 393, 230, 39, 52);
+        adaugaIncapere(bloc, "119", "Istorie", 393, 282, 39, 54);
+        adaugaIncapere(bloc, "117", "Istorie", 393, 336, 39, 51);
 
-        private void asambleazaBlocA3(Pane bloc) {
-            adaugaIncapere(bloc, null, "A doua scară, Etaj 3, A", 340, 176, 39, 19);
-            adaugaIncapere(bloc, "308", "Catedra Științe reale", 340, 194, 39, 38);
-            adaugaIncapere(bloc, "306", "Chimie", 340, 232, 39, 51);
-            adaugaIncapere(bloc, "304", "Limba și Literatura Română", 340, 283, 39, 51);
-            adaugaIncapere(bloc, "302", "Limba engleză", 340, 335, 39, 33);
-            adaugaIncapere(bloc, null, "Prima scară, Etaj 3, A", 340, 368, 39, 19);
-            adaugaIncapere(bloc, "309", "Limba engleză", 393, 176, 39, 38);
-            adaugaIncapere(bloc, "307", "Laboratorul de chimie", 393, 214, 39, 16);
-            adaugaIncapere(bloc, "305", "Geografie", 393, 230, 39, 52);
-            adaugaIncapere(bloc, "303", "Geografie", 393, 282, 39, 53);
-            adaugaIncapere(bloc, "301", "Limba și Literatura Română", 393, 335, 39, 52);
-        }
+        adaugaIncaperePoligon(bloc, null, "Coridor Etaj 1, bloc A", 379, 176, 394, 176, 394, 387, 379, 387);
+    }
 
-        private void asambleazaBlocB1(Pane bloc) {
-        adaugaIncapere(bloc, "115", "", 402, 394, 441-402, 412-394);
-        adaugaIncapere(bloc, "113", "", 402, 412, 441-402, 467-412);
-        adaugaIncapere(bloc, "111", "", 442, 431, 466-441, 467- 431);
-        adaugaIncapere(bloc, null, null, 441, 394, 466-441, 431-394);
-        adaugaIncapere(bloc, "118", "", 402, 490,  437-402, 533-490);
+    private void asambleazaBlocA2(Pane bloc) {
+        adaugaIncapere(bloc, null, "A doua scară, Etaj 2, A", 340, 176, 39, 19);
+        adaugaIncaperePoligon(bloc, "WC", "WC-B-A2", Color.WHITE, Color.BLACK, 340, 195, 379, 195, 379, 206, 364, 206, 364, 214, 340, 214);
+        adaugaIncaperePoligon(bloc, null, "WC-Persoane-cu-necesități-speciale-A2", Color.WHITE, Color.BLACK, 364, 206, 379, 206, 379, 216, 364, 216);
+        adaugaIncaperePoligon(bloc, "WC", "WC-F-A2", Color.WHITE, Color.BLACK, 340, 214, 364, 214, 364, 216, 379, 216, 379, 232, 340, 232);
+        adaugaIncapere(bloc, "224", "Limba și Literatura Română", 340, 232, 39, 51);
+        adaugaIncapere(bloc, "222", "Limba și Literatura Română", 340, 283, 39, 51);
+        adaugaIncapere(bloc, "220", "Limba franceză", 340, 335, 39, 33);
+        adaugaIncapere(bloc, null, "Prima scară, Etaj 2, A", 340, 368, 39, 19);
+        adaugaIncapere(bloc, "226", "Limba engleză", 393, 176, 39, 38);
+        adaugaIncapere(bloc, "225", "Servicii admnistrative", 393, 214, 39, 51);
+        adaugaIncapere(bloc, "223", "Secția didactică 4 (Șef: Vasile Melnic)", 393, 265, 39, 17);
+        adaugaIncapere(bloc, "221", "Servicii administrative", 393, 282, 39, 53);
+        adaugaIncapere(bloc, "219", "Istorie", 393, 335, 39, 52);
+
+        adaugaIncaperePoligon(bloc, null, "Coridor Etaj 2, bloc A", 379, 176, 393, 176, 394, 387, 379, 387);
+    }
+    private void asambleazaBlocA3(Pane bloc) {
+        adaugaIncapere(bloc, null, "A doua scară, Etaj 3, A", 340, 176, 39, 19);
+        adaugaIncapere(bloc, "308", "Catedra Științe reale", 340, 194, 39, 38);
+        adaugaIncapere(bloc, "306", "Chimie", 340, 232, 39, 51);
+        adaugaIncapere(bloc, "304", "Limba și Literatura Română", 340, 283, 39, 51);
+        adaugaIncapere(bloc, "302", "Limba engleză", 340, 335, 39, 33);
+        adaugaIncapere(bloc, null, "Prima scară, Etaj 3, A", 340, 368, 39, 19);
+        adaugaIncapere(bloc, "309", "Limba engleză", 393, 176, 39, 38);
+        adaugaIncapere(bloc, "307", "Laboratorul de chimie", 393, 214, 39, 16);
+        adaugaIncapere(bloc, "305", "Geografie", 393, 230, 39, 52);
+        adaugaIncapere(bloc, "303", "Geografie", 393, 282, 39, 53);
+        adaugaIncapere(bloc, "301", "Limba și Literatura Română", 393, 335, 39, 52);
+
+        adaugaIncaperePoligon(bloc, null, "Coridor Etaj 3, bloc A", 379, 176, 394, 176, 394, 387, 379, 387);
+    }
+
+    private void asambleazaBlocC1(Pane bloc) {
+        adaugaIncapere(bloc, "115", "", 400, 394, 442-400, 412-394);
+        adaugaIncapere(bloc, "113", "", 400, 412, 442-400, 467-412);
+        adaugaIncapere(bloc, "111", "", 442, 431, 466-442, 467- 431);
+        adaugaIncapere(bloc, null, null, 442, 394, 466-442, 431-394);
+        adaugaIncapere(bloc, "118", "", 400, 490,  437-400, 533-490);
         adaugaIncapere(bloc, "116", "", 436, 490, 483-436, 533- 490);
-        adaugaIncapere(bloc, null, null, 466, 447, 485-466, 467-447);
+        adaugaIncapere(bloc, null, null, 467, 447, 485-467, 467-447);
         adaugaIncapere(bloc, "114", "", 483, 490, 521-483, 545-490);
         adaugaIncapere(bloc, "112", "", 521, 490, 574-521, 533-490);
         adaugaIncapere(bloc, "110", "", 574, 490, 599-574, 533-490);
         adaugaIncapere(bloc, null, "Rcepție", 599, 490, 637-599, 546-490);
-        adaugaIncapere(bloc, null, null, 599, 528, 611-599, 545-528);
-        adaugaIncapere(bloc, null, null, 625, 528, 637-625, 546-528);
+        adaugaIncapere(bloc, null, null, 599, 527, 611-599, 546-527);
+        adaugaIncapere(bloc, null, null, 624, 527, 637-624, 546-527);
         adaugaIncapere(bloc, "109", "", 571, 423, 605-571, 467-423);
-        adaugaIncapere(bloc, null, null, 581, 402, 607-581, 419-402);
-        adaugaIncapere(bloc, null, null, 581, 370, 607-581, 402-370);
-        adaugaIncapere(bloc, null, null, 619, 390, 656-619, 420-390);
-        adaugaIncapere(bloc, null, null, 619, 370, 656-619, 390-370);
-        adaugaIncapere(bloc, "Bufet", "Bufet", 575, 305, 619-575, 370-305);
-        adaugaIncapere(bloc, null, "Bufet", 575, 285, 620-575, 304-285);
-        adaugaIncapere(bloc, null, null, 619, 285, 662-619, 370-285);
-        adaugaIncaperePoligon(bloc, null, null, Color.WHITE, Color.BLACK, 633, 285, 633, 301, 636, 304, 662, 303, 662, 285);
-        adaugaIncaperePoligon(bloc, null, null, Color.WHITE, Color.BLACK, 636, 304, 636, 332, 662, 332, 662, 303);
-        adaugaIncaperePoligon(bloc, null, null, Color.WHITE, Color.BLACK, 636, 332, 636, 337, 632, 337, 632, 348, 662, 348, 662, 331);
-        adaugaIncaperePoligon(bloc, null, null, Color.WHITE, Color.BLACK, 629, 348, 629, 370, 662, 370, 662, 349);
+        adaugaIncapere(bloc, null, null, 581, 402, 607-581, 423-402, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, null, null, 581, 370, 607-581, 402-370, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, null, null, 619, 390, 656-619, 423-390, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, null, null, 619, 370, 656-619, 390-370, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, null, null, 607, 370, 620-607, 423-370, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, "Bufet", "Bufet", 575, 305, 619-575, 370-305, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, null, "Bufet", 575, 285, 620-575, 305-285, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, null, null, 619, 285, 662-619, 370-285, Color.SILVER, Color.BLACK);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 633, 285, 633, 301, 636, 304, 662, 304, 662, 285);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 636, 304, 636, 332, 662, 332, 662, 304);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 636, 332, 636, 337, 632, 337, 632, 348, 662, 348, 662, 332);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 629, 348, 629, 370, 662, 370, 662, 348);
         adaugaIncapere(bloc, "107", "", 632, 429, 667-632, 467-429);
-        adaugaIncapere(bloc, "105", "", 680, 429, 722-680, 464-429);
+        adaugaIncapere(bloc, "105", "", 680, 429, 722-680, 467-429);
         adaugaIncapere(bloc, "103", "", 722, 429, 768-722, 462-429);
         adaugaIncapere(bloc, null, null, 768, 455, 807-768, 462-455);
         adaugaIncaperePoligon(bloc, "Sala de\nLectură", "Sala de Lectură", Color.WHITE, Color.BLACK, 769, 455, 769, 307, 827, 307, 827, 440, 807, 440, 807, 455);
+        adaugaIncapere(bloc, null, null, 807, 455, 827-807, 462-455);
         adaugaIncapere(bloc, null, null, 807, 440, 827-807, 455-440);
-        adaugaIncapere(bloc, "101", "", 828, 381, 869-828, 455-381);
+        adaugaIncapere(bloc, "101", "", 827, 381, 869-827, 455-381);
         adaugaIncapere(bloc, "Bibli-\notecă", "Bibliotecă", 827, 328, 869-827, 382-328);
         adaugaIncapere(bloc, null, null, 827, 307, 869-827, 328-307);
-        adaugaIncapere(bloc, "108", "", 636, 490, 680-636, 533-490);
+        adaugaIncapere(bloc, "108", "", 637, 490, 680-637, 533-490);
         adaugaIncapere(bloc, "106", "", 680, 490, 717-680, 533-490);
         adaugaIncapere(bloc, null, null, 717, 483, 725-717, 534-483);
         adaugaIncapere(bloc, null, null, 725, 493, 740-725, 512-493);
         adaugaIncapere(bloc, null, null, 740, 493, 764-740, 512-493);
         adaugaIncapere(bloc, "104", null, 725, 512, 764-725, 545-512);
-        adaugaIncapere(bloc, "102", "", 764, 493, 845-764, 534-493);
-        adaugaIncapere(bloc, null, null, 575, 272, 626-575, 285-272);
+        adaugaIncapere(bloc, "102", "", 764, 493, 845-764, 534-493);adaugaIncapere(bloc, null, null, 575, 272, 626-575, 285-272);
         adaugaIncapere(bloc, "140", "", 572, 236, 626-572, 272-236);
         adaugaIncapere(bloc, "139", "", 572, 199, 617-572, 236-199);
-        adaugaIncapere(bloc, "141", "", 626, 236, 662-626, 284-236);
+        adaugaIncapere(bloc, "141", "", 626, 236, 662-626, 285-236);
         adaugaIncapere(bloc, null, null, 638, 217, 662-638, 226-217);
-        adaugaIncapere(bloc, null, null, 640, 199, 662-640, 218-199);
+        adaugaIncapere(bloc, null, null, 640, 199, 662-640, 217-199);
+
+        adaugaIncaperePoligon(bloc, null, "Coridor central-lateral, Etaj 1", 376, 387, 432, 387, 432, 393, 400, 393, 400, 489, 376, 489);
+        adaugaIncaperePoligon(bloc, null, "Coridor central, Etaj 1", 400, 467, 605, 467, 605, 423, 632, 423, 632, 467, 717, 467, 717, 489, 400, 489);
+        adaugaIncaperePoligon(bloc, null, "Coridor Sala de Lectură", 717, 467, 722, 467, 722, 462, 845, 462, 845, 493, 725, 493, 725, 483, 717, 483);
+        adaugaIncaperePoligon(bloc, null, "Coridor Forneti", 667, 467, 667, 429, 632, 429, 632, 423, 656, 423, 656, 371, 663, 371, 663, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 398, 690, 398, 690, 414, 684, 414, 684, 429, 677, 429, 677, 430, 680, 430, 680, 467);
+        adaugaIncaperePoligon(bloc, null, "Coridor Operatori, Etaj 1", 617, 199, 617, 236, 626, 236, 626, 212, 627, 212, 627, 236, 662, 236, 662, 226, 638, 226, 638, 217, 640, 217, 640, 199, 627, 199, 627, 202, 626, 202, 626, 199);
     }
+
+    private void asambleazaBlocC2(Pane bloc) {
+        adaugaIncapere(bloc, null, null, 400, 394, 441-400, 412-394);
+        adaugaIncapere(bloc, "217", "", 400, 412, 441-400, 467-412);
+        adaugaIncapere(bloc, null, null, 441, 394, 466-441, 431-394);
+        adaugaIncapere(bloc, "215", "", 441, 431, 466-441, 467-431);
+        adaugaIncapere(bloc, "218", "", 400, 467, 426-400, 490-467);
+        adaugaIncapere(bloc, null, null, 466, 447, 485-466, 467-447);
+        adaugaIncapere(bloc, "216", "", 400, 490, 439-400, 533-490);
+        adaugaIncapere(bloc, "214", "", 439, 490, 483-439, 533-490);
+        adaugaIncapere(bloc, "213", "", 483, 490, 520-483, 545-490);
+        adaugaIncapere(bloc, "212", "", 520, 490, 546-520, 533-490);
+        adaugaIncapere(bloc, "211", "", 546, 490, 599-546, 533-490);
+        adaugaIncapere(bloc, "210", "Orange", 599, 490, 636-599, 545-490);
+        adaugaIncapere(bloc, "209", "", 636, 490, 679-636, 533-490);
+        adaugaIncapere(bloc, "208", "", 679, 490, 716-679, 533-490);
+        adaugaIncapere(bloc, null, null, 716, 483, 724-716, 534-483);
+        adaugaIncapere(bloc, null, null, 724, 493, 740-724, 512-493);
+        adaugaIncapere(bloc, null, null, 740, 493, 764-740, 512-493);
+        adaugaIncapere(bloc, "206", "", 724, 512, 764-724, 545-512);
+        adaugaIncapere(bloc, "204", "", 764, 493, 845-764, 533-493);
+        adaugaIncapere(bloc, "", "", 571, 423, 606-571, 467-423);
+        adaugaIncapere(bloc, "", "", 580, 399, 607-580, 423-399);
+        adaugaIncapere(bloc, "", "", 580, 370, 607-580, 399-370);
+        adaugaIncapere(bloc, "", "", 573, 337, 607-573, 370-337);
+        adaugaIncapere(bloc, "", "", 573, 284, 620-573, 337-284);
+        adaugaIncapere(bloc, null, null, 573, 275, 626-573, 284-275);
+        adaugaIncapere(bloc, "", "", 620, 284, 663-620, 330-284);
+        adaugaIncapere(bloc, "", "", 637, 330, 663-637, 371-330);
+        adaugaIncapere(bloc, "", "", 618, 371, 657-618, 396-371);
+        adaugaIncapere(bloc, "", "", 618, 396, 657-618, 423-396);
+        adaugaIncapere(bloc, null, null, 618, 396, 636-618, 405-396);
+        adaugaIncapere(bloc, "207", "", 632, 429, 680-632, 468-429);
+        adaugaIncapere(bloc, "205", "", 680, 429, 722-680, 468-429);
+        adaugaIncapere(bloc, "203", "", 722, 429, 769-722, 462-429);
+        adaugaIncapere(bloc, null, null, 769, 455, 810-769, 462-455);
+        adaugaIncapere(bloc, "202", "", 769, 379, 810-769, 455-379);
+        adaugaIncapere(bloc, null, null, 810, 455, 827-810, 462-455);
+        adaugaIncapere(bloc, "Sala de\nFestivități", "", 810, 320, 869-810, 455-320);
+        adaugaIncapere(bloc, null, null, 810, 306, 869-810, 320-306);
+        adaugaIncapere(bloc, null, null, 810, 251, 869-810, 306-251);
+        adaugaIncapere(bloc, "250", "", 572, 236, 626-572, 275-236);
+        adaugaIncapere(bloc, "249", "", 572, 199, 617-572, 236-199);
+        adaugaIncapere(bloc, "251", "", 626, 236, 663-626, 284-236);
+        adaugaIncapere(bloc, "248", "", 640, 199, 663-640, 217-199);
+
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 376, 387, 432, 387, 432, 393, 400, 393, 400, 489, 376, 489);
+        adaugaIncaperePoligon(bloc, null, "Coridor central, Etaj 2", 400, 467, 605, 467, 605, 423, 632, 423, 632, 467, 716, 467, 716, 489, 400, 489);
+        adaugaIncaperePoligon(bloc, null, "Coridor Sala de Festivități", 716, 467, 722, 467, 722, 462, 845, 462, 845, 493, 724, 493, 724, 483, 716, 483);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 632, 429, 632, 423, 656, 423, 656, 371, 663, 371, 663, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 398, 690, 398, 690, 414, 684, 414, 684, 429);
+        adaugaIncaperePoligon(bloc, null, "Coridor Operatori, Etaj 2", 617, 199, 617, 236, 626, 236, 626, 212, 627, 212, 627, 236, 663, 236, 663, 226, 638, 226, 638, 217, 640, 217, 640, 199, 627, 199, 627, 202, 626, 202, 626, 199);
+    }
+
+    private void asambleazaBlocC3(Pane bloc) {
+        adaugaIncapere(bloc, "311", "", 680, 429, 722-680, 463-429);
+        adaugaIncapere(bloc, "312", "", 722, 429, 769-722, 461-429);
+        adaugaIncapere(bloc, null, null, 769, 437, 790-769, 454-437);
+        adaugaIncapere(bloc, "310", "", 804, 462, 845-804, 493-462);
+        adaugaIncaperePoligon(bloc, null, null, Color.WHITE, Color.BLACK, 722, 462, 725, 462);
+        adaugaIncaperePoligon(bloc, null, null, Color.WHITE, Color.BLACK, 722, 462, 725, 462, 725, 534, 717, 534, 717, 463, 722, 463);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 376, 387, 432, 387, 432, 393, 467, 393, 467, 447, 484, 447, 484, 466, 571, 466, 571, 423, 579, 423, 579, 371, 573, 371, 573, 276, 571, 276, 571, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 399, 690, 399, 690, 414, 684, 414, 684, 429, 680, 429, 680, 463, 717, 463, 717, 534, 637, 534, 637, 546, 598, 546, 598, 534, 521, 534, 521, 546, 482, 546, 482, 534, 400, 534, 400, 489, 376, 489);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 725, 493, 845, 493, 845, 534, 764, 534, 764, 546, 725, 546);
+
+        adaugaIncaperePoligon(bloc, null, null, 725, 462, 788, 462, 788, 461, 769, 461, 769, 454, 790, 454, 790, 437, 798, 437, 798, 454, 810, 454, 810, 462, 798, 462, 798, 463, 804, 463, 804, 493, 725, 493);
+    }
+
+    private void asambleazaBlocB1(Pane bloc) {
+        adaugaIncaperePoligon(bloc, "WC", null, 769, 272, 769, 307, 790, 307, 790, 284, 778, 284, 790, 284, 790, 272);
+        adaugaIncaperePoligon(bloc, "WC", null, 790, 272, 790, 284, 801, 284, 790, 284, 790, 307, 810, 307, 810, 272);
+        adaugaIncaperePoligon(bloc, null, null, 810, 274, 810, 307, 820, 307, 820, 286, 810, 286, 820, 286, 820, 274);
+        adaugaIncaperePoligon(bloc, null, null, 820, 274, 820, 306, 829, 306, 829, 286, 820, 286, 829, 286, 829, 274);
+        adaugaIncaperePoligon(bloc, null, "Coridor Etaj 1, bloc B", 751, 251, 751, 272, 769, 272, 769, 267, 769, 272, 810, 272, 810, 268, 810, 274, 829, 274, 829, 134, 810, 134, 810, 255, 810, 251, 769, 251, 769, 256, 769, 251);
+        adaugaIncapere(bloc, "134", "", 829, 251, 869-829, 328-251);
+        adaugaIncapere(bloc, "136", "", 829, 226, 869-829, 247-226);
+        adaugaIncapere(bloc, "138", "", 829, 169, 869-829, 226-169);
+        adaugaIncapere(bloc, "135", "", 769, 169, 810-769, 231-169);
+        adaugaIncaperePoligon(bloc, null, null, 769, 231, 810, 231, 810, 247, 795, 247, 795, 231, 795, 247, 769, 247);
+        adaugaIncaperePoligon(bloc, "VF", "", 769, 134, 795, 134, 795, 160, 810, 160, 810, 169, 769, 169);
+        adaugaIncapere(bloc, null, null, 795, 134, 810-795, 160-134);
+        adaugaIncaperePoligon(bloc, "VB", "", 841, 134, 869, 134, 869, 169, 829, 169, 829, 160, 841, 160);
+        adaugaIncapere(bloc, null, null, 829, 134, 841-829, 160-134);
+        adaugaIncaperePoligon(bloc, "Sala Sportivă\n137", "Sala Sportivă", 660, 5, 665, 5, 665, 8, 666, 8, 666, 5, 698, 5, 698, 8, 699, 8, 699, 5, 735, 5, 735, 8, 736, 8, 736, 5, 772, 5, 772, 8, 773, 8, 773, 5, 809, 5, 809, 8, 810, 8, 810, 5, 845, 5, 845, 8, 846, 8, 846, 5, 879, 5, 879, 8, 880, 8, 880, 5, 884, 5, 884, 47, 881, 47, 881, 48, 884, 48, 884, 66, 881, 66, 881, 67, 884, 67, 884, 69, 885, 69, 885, 65, 890, 65, 890, 85, 885, 85, 885, 81, 884, 81, 884, 84, 881, 84, 881, 85, 884, 85, 884, 102, 881, 102, 881, 103, 884, 103, 884, 123, 876, 123, 876, 120, 875, 120, 875, 123, 843, 123, 843, 120, 842, 120, 842, 126, 843, 126, 843, 123, 869, 123, 869, 134, 843, 134, 843, 131, 842, 131, 842, 134, 805, 134, 805, 121, 806, 121, 806, 120, 804, 120, 804, 121, 805, 121, 805, 134, 770, 134, 770, 120, 769, 120, 769, 123, 735, 123, 735, 120, 734, 120, 734, 123, 698, 123, 698, 120, 697, 120, 697, 123, 665, 123, 665, 120, 664, 120, 664, 123, 660, 123, 660, 103, 663, 103, 663, 102, 660, 102, 660, 83, 663, 83, 663, 82, 660, 82, 660, 65, 663, 65, 663, 64, 660, 64, 660, 45, 663, 45, 663, 44, 660, 44, 660, 25, 663, 25, 663, 24, 660, 24);
+        adaugaIncaperePoligon(bloc, null, null, 731, 123, 770, 123, 770, 134, 769, 134, 769, 154, 731, 154);
+        adaugaIncapere(bloc, null, null, 714, 123, 731-714, 137-123);
+        adaugaIncapere(bloc, null, null, 714, 137, 731-714, 154-137);
+        adaugaIncapere(bloc, "133", "", 660, 123, 714-660, 154-123);
+    }
+
+    private void asambleazaBlocB2(Pane bloc) {
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 660, 154, 660, 5, 884, 5, 884, 123, 869, 123, 869, 134, 769, 134, 769, 154);
+        adaugaIncapere(bloc, "243", "", 769, 134, 810-769, 170-134);
+        adaugaIncapere(bloc, "241", "", 769, 170, 810-769, 212-170);
+        adaugaIncapere(bloc, "239", "", 769, 212, 810-769, 231-212);
+        adaugaIncapere(bloc, "238", "", 769, 231, 795-769, 247-231);
+        adaugaIncapere(bloc, "244", "", 829, 134, 869-829, 170-134);
+        adaugaIncapere(bloc, "242", "", 829, 170, 869-829, 206-170);
+        adaugaIncapere(bloc, "240", "", 829, 206, 869-829, 247-206);
+        adaugaIncapere(bloc, null, null,751, 251, 769-751, 272-251, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, "245", "", 769, 272, 801-769, 307-272);
+        adaugaIncapere(bloc, "246", "", 769, 307, 801-769, 345-307);
+        adaugaIncapere(bloc, "247", "", 769, 345, 810-769, 379-345);
+        adaugaIncaperePoligon(bloc, null, "Coridor Etaj 2, bloc B", 810, 134, 810, 231, 795, 231, 795, 247, 801, 247, 801, 251, 769, 251, 769, 272, 801, 272, 801, 345, 810, 345, 810, 272, 807, 272, 810, 272, 810, 247, 829, 247, 829, 134);
+    }
+
+    private void asambleazaBlocB3(Pane bloc) {
+        adaugaIncaperePoligon(bloc, null, "Coridor Etaj 3, bloc B", 798, 454, 810, 454, 810, 272, 808, 272, 810, 272, 810, 251, 769, 251, 769, 272, 800, 272, 800, 307, 798, 307);
+        adaugaIncapere(bloc, null, null,751, 251, 769-751, 272-251, Color.SILVER, Color.BLACK);
+        adaugaIncapere(bloc, "316", "", 769, 272, 800-769, 307-272);
+        adaugaIncapere(bloc, "315", "", 769, 307, 798-769, 363-307);
+        adaugaIncapere(bloc, "314", "", 769, 363, 798-769, 380-363);
+        adaugaIncapere(bloc, "313", "", 769, 380, 798-769, 437-380);
+        adaugaIncapere(bloc, null, null, 810, 251, 869-810, 454-251, Color.SILVER, Color.BLACK);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 660, 154, 660, 5, 884, 5, 884, 123, 869, 123, 869, 247, 769, 247, 769, 149, 769, 154);
+    }
+
+    private void asambleazaBlocE1(Pane bloc) {
+        adaugaIncapere(bloc, "128", "", 348, 88, 387-348, 126-88);
+        adaugaIncapere(bloc, "127", "", 387, 98, 424-387, 126-98);
+        adaugaIncapere(bloc, "129", "", 438, 87, 473-438, 126-87);
+        adaugaIncapere(bloc, "130", "", 473, 87, 509-473, 126-87);
+        adaugaIncapere(bloc, "131", "", 509, 87, 550-509, 125-87);
+        adaugaIncapere(bloc, "132", "", 550, 79, 588-550, 126-79);
+        adaugaIncapere(bloc, null, null, 409, 126, 442-409, 134-126);
+        adaugaIncapere(bloc, null, null, 442, 126, 459-442, 134-126);
+        adaugaIncapere(bloc, null, null, 493, 126, 531-493, 134-126);
+        adaugaIncapere(bloc, null, null, 550, 126, 570-550, 134-126);
+        adaugaIncaperePoligon(bloc, null, null, 660, 125, 660, 17, 618, 17, 618, 26, 583, 26, 583, 37, 552, 37, 552, 79, 588, 79, 588, 125, 621, 125, 621, 111, 646, 111, 646, 125);
+        adaugaIncaperePoligon(bloc, null, null, 387, 88, 387, 98, 425, 98, 425, 125, 438, 125, 438, 88, 425, 88, 425, 91, 424, 91, 424, 88);
+    }
+
+    private void asambleazaBlocE2(Pane bloc) {
+        adaugaIncapere(bloc, "233", "", 348, 88, 387-348, 126-88);
+        adaugaIncapere(bloc, "232", "", 387, 98, 425-387, 126-98);
+        adaugaIncapere(bloc, "235", "", 436, 99, 470-436, 126-99);
+        adaugaIncapere(bloc, "234", "", 470, 87, 509-470, 126-87);
+        adaugaIncapere(bloc, "236", "", 509, 87, 550-509, 126-87);
+        adaugaIncapere(bloc, "237", "", 550, 79, 588-550, 126-79);
+        adaugaIncapere(bloc, null, null, 409, 126, 442-409, 134-126);
+        adaugaIncapere(bloc, null, null, 442, 126, 459-442, 134-126);
+        adaugaIncapere(bloc, null, null, 493, 126, 531-493, 134-126);
+        adaugaIncapere(bloc, null, null, 550, 126, 570-550, 134-126);
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 660, 125, 660, 17, 618, 17, 618, 26, 583, 26, 583, 37, 552, 37, 552, 79, 588, 79, 588, 125, 621, 125, 621, 111, 646, 111, 646, 125);
+        adaugaIncaperePoligon(bloc, null, null, 387, 88, 387, 98, 425, 98, 425, 126, 437, 126, 437, 98, 438, 98, 438, 99, 470, 99, 470, 88, 439, 88, 439, 89, 437, 89, 437, 90, 436, 90, 436, 88, 425, 88, 425, 91, 424, 91, 424, 88);
+    }
+
+    private void asambleazaBlocE3(Pane bloc) {
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 660, 125, 660, 18, 620, 18, 620, 25, 583, 25, 583, 37, 552, 37, 552, 80, 550, 80, 550, 87, 438, 87, 438, 89, 349, 89, 349, 125, 409, 125, 409, 134, 459, 134, 459, 125, 493, 125, 493, 134, 531, 134, 531, 125, 550, 125, 550, 134, 570, 134, 570, 125, 620, 125, 620, 110, 646, 110, 646, 125);
+    }
+
+    private void asambleazaBlocD1(Pane bloc) {
+        adaugaIncapere(bloc, null, null, 235, 388, 275-235, 421-388);
+        adaugaIncapere(bloc, null, null, 235, 362, 275-235, 388-362);
+        adaugaIncapere(bloc, null, null, 235, 336, 275-235, 362-336);
+        adaugaIncapere(bloc, "126", "", 235, 292, 275-235, 336-292);
+        adaugaIncapere(bloc, "125", "", 245, 251, 275-245, 292-251);
+        adaugaIncaperePoligon(bloc, null, null, 235, 239, 235, 292, 245, 292, 245, 251, 275, 251, 275, 239);
+        adaugaIncaperePoligon(bloc, null, null, 237, 239, 243, 206, 263, 209, 275, 239);
+        adaugaIncaperePoligon(bloc, null, null, 243, 206, 249, 169, 267, 172, 263, 209);
+        adaugaIncaperePoligon(bloc, null, null, 249, 169, 253, 143, 270, 145, 267, 172);
+        adaugaIncaperePoligon(bloc, null, null, 253, 143, 255, 127, 271, 127, 270, 145);
+    }
+
+    private void asambleazaBlocD2(Pane bloc) {
+        adaugaIncapere(bloc, null, null, 235, 388, 276-235, 422-388);
+        adaugaIncapere(bloc, "231", "", 235, 336, 276-235, 388-336);
+        adaugaIncapere(bloc, "230", "", 246, 292, 276-246, 336-292);
+        adaugaIncapere(bloc, "229", "", 246, 261, 276-246, 292-261);
+        adaugaIncaperePoligon(bloc, "228", "", 246, 249, 246, 261, 276, 261, 276, 239, 252, 239, 252, 249);
+        adaugaIncaperePoligon(bloc, null, null, 235, 239, 252, 239, 252, 249, 246, 249, 246, 260, 245, 260, 245, 261, 246, 261, 246, 292, 243, 292, 243, 293, 246, 293, 246, 336, 235, 336, 235, 293, 237, 293, 237, 292, 235, 292);
+        adaugaIncaperePoligon(bloc, null, null, 237, 239, 243, 206, 263, 209, 276, 239);
+        adaugaIncaperePoligon(bloc, "227", "", 243, 206, 249, 164, 267, 167, 263, 209);
+        adaugaIncaperePoligon(bloc, null, null, 249, 164, 253, 143, 270, 145, 267, 167);
+        adaugaIncaperePoligon(bloc, null, null, 253, 143, 255, 127, 272, 127, 270, 145);
+    }
+
+    private void asambleazaBlocD3(Pane bloc) {
+        adaugaIncaperePoligon(bloc, null, null, Color.SILVER, Color.BLACK, 235, 421, 235, 240, 238, 240, 255, 127, 272, 127, 263, 209, 276, 239, 276, 421);
+    }
+
     private Pane creeazaEtaj() {
         Pane etaj = new Pane();
         etaj.setMinSize(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
