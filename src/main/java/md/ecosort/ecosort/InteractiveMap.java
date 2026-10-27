@@ -257,6 +257,68 @@ public class InteractiveMap extends BorderPane {
         adaugaIncaperePoligon(bloc, null, "Coridor Sala de Lectură", 717, 467, 722, 467, 722, 462, 845, 462, 845, 493, 725, 493, 725, 483, 717, 483);
         adaugaIncaperePoligon(bloc, null, "Coridor Forneti", 667, 467, 667, 429, 632, 429, 632, 423, 656, 423, 656, 371, 663, 371, 663, 199, 684, 199, 684, 254, 700, 254, 700, 270, 684, 270, 684, 398, 690, 398, 690, 414, 684, 414, 684, 429, 677, 429, 677, 430, 680, 430, 680, 467);
         adaugaIncaperePoligon(bloc, null, "Coridor Operatori, Etaj 1", 617, 199, 617, 236, 626, 236, 626, 212, 627, 212, 627, 236, 662, 236, 662, 226, 638, 226, 638, 217, 640, 217, 640, 199, 627, 199, 627, 202, 626, 202, 626, 199);
+
+        adaugaUsa(bloc, 613, 545, 622, 545);
+        adaugaUsa(bloc, 601, 527, 608, 527);
+        adaugaUsa(bloc, 627, 527, 635, 527);
+        adaugaUsa(bloc, 606, 490, 628, 490);
+        adaugaUsa(bloc, 608, 424, 615, 424);
+        adaugaUsa(bloc, 607, 410, 607, 406, Color.SILVER);
+        adaugaUsa(bloc, 620, 404, 620, 396, Color.SILVER);
+        adaugaUsa(bloc, 620, 388, 620, 381, Color.SILVER);
+        adaugaUsa(bloc, 607, 387, 607, 381, Color.SILVER);
+        adaugaUsa(bloc, 609, 370, 615, 370, Color.SILVER);
+        adaugaUsa(bloc, 619, 356, 619, 348, Color.SILVER);
+        adaugaUsa(bloc, 619, 320, 619, 314, Color.SILVER);
+        adaugaUsa(bloc, 619, 298, 619, 290, Color.SILVER);
+        adaugaUsa(bloc, 636, 319, 636, 310, Color.SILVER);
+        adaugaUsa(bloc, 646, 304, 651, 304, Color.SILVER);
+        adaugaUsa(bloc, 632, 341, 632, 344, Color.SILVER);
+        adaugaUsa(bloc, 626, 265, 626, 257);
+        adaugaUsa(bloc, 618, 236, 625, 236);
+        adaugaUsa(bloc, 626, 212, 626, 203);
+        adaugaUsa(bloc, 630, 199, 637, 199);
+        adaugaUsa(bloc, 628, 236, 633, 236);
+        adaugaUsa(bloc, 638, 223, 638, 220);
+        adaugaUsa(bloc, 640, 212, 640, 206);
+        adaugaUsa(bloc, 662, 208, 662, 202);
+        adaugaUsa(bloc, 690, 401, 690, 412);
+        adaugaUsa(bloc, 669, 466, 677, 466);
+        adaugaUsa(bloc, 700, 257, 700, 267);
+
+        adaugaFereastra(bloc, 610, 543, 610, 530, 1);
+        adaugaFereastra(bloc, 625, 543, 625, 530, 1);
+        adaugaFereastra(bloc, 601, 545, 607, 545, 2);
+        adaugaFereastra(bloc, 628, 545, 634, 545, 2);
+        adaugaFereastra(bloc, 644, 533, 654, 533, 2);
+        adaugaFereastra(bloc, 576, 305, 618, 305, 1, Color.SILVER);
+        adaugaFereastra(bloc, 662, 361, 662, 353, 2, Color.SILVER);
+        adaugaFereastra(bloc, 662, 341, 662, 333, 2, Color.SILVER);
+        adaugaFereastra(bloc, 662, 321, 662, 312, 2, Color.SILVER);
+        adaugaFereastra(bloc, 662, 300, 662, 292, 2, Color.SILVER);
+        adaugaFereastra(bloc, 618, 200, 624, 200, 2);
+        adaugaFereastra(bloc, 573, 267, 573, 258, 2);
+        adaugaFereastra(bloc, 573, 251, 573, 245, 2);
+        adaugaFereastra(bloc, 580, 200, 587, 200, 2);
+        adaugaFereastra(bloc, 596, 200, 603, 200, 2);
+        adaugaFereastra(bloc, 648, 200, 656, 200, 2);
+        adaugaFereastra(bloc, 669, 200, 678, 200, 2);
+        adaugaFereastra(bloc, 683, 200, 683, 210, 2);
+        adaugaFereastra(bloc, 683, 214, 683, 224, 2);
+        adaugaFereastra(bloc, 683, 228, 683, 238, 2);
+        adaugaFereastra(bloc, 683, 242, 683, 251, 2);
+        adaugaFereastra(bloc, 688, 254, 697, 254, 2);
+        adaugaFereastra(bloc, 688, 270, 697, 270, 2);
+        adaugaFereastra(bloc, 683, 272, 683, 283, 2);
+        adaugaFereastra(bloc, 683, 287, 683, 297, 2);
+        adaugaFereastra(bloc, 683, 301, 683, 311, 2);
+        adaugaFereastra(bloc, 683, 315, 683, 325, 2);
+        adaugaFereastra(bloc, 683, 329, 683, 339, 2);
+        adaugaFereastra(bloc, 683, 343, 683, 354, 2);
+        adaugaFereastra(bloc, 683, 358, 683, 368, 2);
+        adaugaFereastra(bloc, 683, 372, 683, 383, 2);
+        adaugaFereastra(bloc, 683, 387, 683, 397, 2);
+        adaugaFereastra(bloc, 683, 416, 683, 426, 2);
     }
 
     private void asambleazaBlocC2(Pane bloc) {
@@ -472,7 +534,7 @@ public class InteractiveMap extends BorderPane {
         Rectangle rectangle = new Rectangle(coordonataX, coordonataY, lungime, latime);
         rectangle.setFill(culoareFundal);
         rectangle.setStroke(culoareBordura);
-        rectangle.setStrokeWidth(1.5);
+        rectangle.setStrokeWidth(2);
 
         // Numele încăperii (de ex: 112, 123, 118, 213, 250, Sala Sportivă, Bufet, Sala de Lectură)
         Text text = creeazaText(cod, 10);
@@ -492,7 +554,7 @@ public class InteractiveMap extends BorderPane {
         Polygon polygon = new Polygon(puncte);
         polygon.setFill(culoareFundal);
         polygon.setStroke(culoareBordura);
-        polygon.setStrokeWidth(1.5);
+        polygon.setStrokeWidth(2);
 
         Text text = creeazaText(cod, 10);
         afiseazaTextCentrat(text, polygon.getLayoutBounds().getCenterX(), polygon.getLayoutBounds().getCenterY(), polygon.getLayoutBounds().getWidth() - 4, polygon.getLayoutBounds().getHeight() - 2);
@@ -504,12 +566,56 @@ public class InteractiveMap extends BorderPane {
     }
 
     private void adaugaUsa(Pane bloc, double startX, double startY, double endX, double endY) {
+        adaugaUsa(bloc, startX, startY, endX, endY, Color.WHITE);
+    }
+
+    private void adaugaUsa(Pane bloc, double startX, double startY, double endX, double endY, Color culoare) {
         Line usa = new Line(startX, startY, endX, endY);
-        usa.setStroke(Color.WHITE);
+        usa.setStroke(culoare);
         usa.setStrokeWidth(4);
         usa.setStrokeLineCap(StrokeLineCap.BUTT);
         usa.setMouseTransparent(true);
         bloc.getChildren().add(usa);
+    }
+
+    private void adaugaFereastra(Pane bloc, double startX, double startY, double endX, double endY, int nr_de_straturi){
+        adaugaFereastra(bloc, startX, startY, endX, endY, nr_de_straturi, Color.WHITE);
+    }
+
+    private void adaugaFereastra(Pane bloc, double startX, double startY, double endX, double endY, int nr_de_straturi, Color culoare) {
+        Color culoareFereastra = culoare;
+        double grosimeLinie = 1.0;
+
+        double spatiere = 1.5;
+
+        double dx = endX - startX;
+        double dy = endY - startY;
+        double lungime = Math.sqrt(dx * dx + dy * dy);
+
+        if (lungime == 0) return;
+
+        double normalX = -dy / lungime;
+        double normalY = dx / lungime;
+
+        double latimeTotala = (nr_de_straturi - 1) * spatiere;
+        double offsetStart = -latimeTotala / 2.0;
+
+        for (int i = 0; i < nr_de_straturi; i++) {
+            double offsetCurent = offsetStart + (i * spatiere);
+
+            double x1 = startX + normalX * offsetCurent;
+            double y1 = startY + normalY * offsetCurent;
+            double x2 = endX + normalX * offsetCurent;
+            double y2 = endY + normalY * offsetCurent;
+
+            Line strat = new Line(x1, y1, x2, y2);
+            strat.setStroke(culoareFereastra);
+            strat.setStrokeWidth(grosimeLinie);
+            strat.setStrokeLineCap(StrokeLineCap.BUTT);
+            strat.setMouseTransparent(true);
+
+            bloc.getChildren().add(strat);
+        }
     }
 
     private Text creeazaText(String continut, double dimensiune_text) {
