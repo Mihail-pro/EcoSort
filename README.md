@@ -1,121 +1,121 @@
-# ♻ EcoSort — colectarea selectivă a deșeurilor la CEITI
+# EcoSort
+
+Evidența colectării selective a deșeurilor la CEITI.
 
 ![EcoSort](docs/ecosort-banner.png)
 
-**EcoSort** este o aplicație pentru calculator în care elevii și profesorii notează deșeurile reciclate
-(plastic, hârtie, sticlă, metal, baterii), văd pe harta colegiului unde sunt coșurile și urmăresc cât s-a
-strâns în fiecare lună.
+EcoSort este o aplicație desktop în care se înregistrează deșeurile predate la reciclare (plastic, hârtie,
+sticlă, metal, baterii). Aplicația arată pe harta colegiului unde sunt coșurile de colectare și cât s-a
+colectat în fiecare lună.
 
----
+## Instalare și pornire
 
-## 🚀 Cum pornești aplicația (3 pași)
+### 1. Instalează Java și Docker Desktop
 
-### Pasul 1 — Instalează două programe *(doar prima dată)*
+Se face o singură dată.
 
-| Program | Link | Cum instalezi |
-|---------|------|---------------|
-| **Java** | [adoptium.net](https://adoptium.net) | Apasă butonul mare de descărcare → deschide fișierul → *Next, Next, Finish* |
-| **Docker Desktop** | [docker.com](https://www.docker.com/products/docker-desktop) | *Download for Windows* → deschide fișierul → *Next, Next, Finish*. Dacă cere repornirea calculatorului, acceptă. |
+- Java: [adoptium.net](https://adoptium.net). Descarcă, deschide fișierul și urmează pașii instalării.
+- Docker Desktop: [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop).
+  Descarcă, deschide fișierul și urmează pașii instalării. Dacă cere repornirea calculatorului, repornește-l.
+  Contul Docker nu este necesar.
 
-> 💡 Nu trebuie să instalezi altceva. Contul Docker nu e necesar — poți apăsa *Skip* la autentificare.
+### 2. Descarcă proiectul
 
-### Pasul 2 — Descarcă proiectul
+1. Pe această pagină apasă butonul verde `Code`, apoi `Download ZIP`.
+2. Click dreapta pe fișierul descărcat, apoi `Extract All` (Extrage tot).
 
-1. Sus pe această pagină apasă butonul verde **`<> Code`** → **Download ZIP**.
-2. Deschide fișierul descărcat și extrage folderul (click dreapta → *Extract All…* / *Extrage tot…*).
+### 3. Pornește aplicația
 
-### Pasul 3 — Pornește
+În folderul extras, dublu-click pe `porneste.bat`.
 
-În folderul extras, fă **dublu-click pe `porneste.bat`**.
+Se deschide o fereastră în care apar pașii pornirii. Prima pornire durează câteva minute. Nu închide
+fereastra până nu se deschide aplicația.
 
-O fereastră neagră îți arată ce se întâmplă. **Prima dată durează câteva minute** (se descarcă baza de date
-și bibliotecile) — lasă fereastra deschisă. La final se deschide aplicația.
+Dacă Windows afișează un avertisment de securitate, alege `More info`, apoi `Run anyway`.
 
-> 💡 Dacă Windows întreabă „Sigur doriți să rulați?”, apasă **Run** / **Executare**
-> (sau *More info → Run anyway*).
+### 4. Creează contul de administrator
 
-### Prima intrare în aplicație
-
-La prima pornire aplicația îți cere să creezi **contul de administrator**: alege un nume de utilizator,
-scrie numele tău și o parolă de minimum 8 caractere.
+La prima pornire aplicația cere crearea contului de administrator: nume de utilizator, nume complet și o
+parolă de cel puțin 8 caractere.
 
 ![Prima pornire](docs/screenshots/00-prima-pornire.png)
 
-Data viitoare intri cu acest cont. Conturile pentru elevi și profesori le creezi din meniul **Utilizatori**.
+Celelalte conturi se creează din aplicație, în secțiunea Utilizatori.
 
-### Data viitoare
+Pentru următoarele porniri este suficient dublu-click pe `porneste.bat`. Datele rămân salvate.
 
-Doar **dublu-click pe `porneste.bat`**. Datele tale rămân salvate.
-
----
-
-## 🖥️ Ce poți face în aplicație
+## Secțiunile aplicației
 
 ### Autentificare
-Fiecare persoană intră cu contul ei. Parolele sunt păstrate criptat.
+
+Fiecare utilizator intră cu contul propriu.
 
 ![Autentificare](docs/screenshots/01-autentificare.png)
 
 ### Hartă și coșuri
-Harta colegiului, pe etaje. Punctele colorate sunt coșurile de reciclare — culoarea arată ce se aruncă în
-ele. Administratorul adaugă un coș cu **+ Punct colectare** și apoi click pe o încăpere; un click pe coș îl
-șterge.
+
+Harta colegiului, pe etaje. Fiecare punct colorat este un coș de colectare; culoarea indică categoria.
+Administratorul adaugă un coș cu butonul `+ Punct colectare` și un click pe încăpere, iar un click pe coș
+îl șterge.
 
 ![Hartă și coșuri](docs/screenshots/02-harta.png)
 
 ### Înregistrare deșeu
-Notezi ce ai predat: categoria, coșul (dacă vrei), cantitatea în kilograme și data.
+
+Se completează categoria, coșul (opțional), cantitatea în kilograme și data.
 
 ![Înregistrare deșeu](docs/screenshots/03-inregistrare.png)
 
 ### Statistici
-Grafice cu cât s-a reciclat în tot colegiul — azi, luna aceasta, anul acesta sau în total — și lista
-înregistrărilor. O înregistrare se poate modifica (dublu-click) sau șterge.
+
+Cantitățile colectate în tot colegiul pe categorii, pentru ziua curentă, luna curentă, anul curent sau în
+total, și lista înregistrărilor. O înregistrare se modifică prin dublu-click sau cu butonul `Editează`.
 
 ![Statistici](docs/screenshots/04-statistici.png)
 
 ### Obiective lunare
-Ținta de reciclare pentru fiecare categorie în luna curentă și cât s-a atins până acum.
-Administratorul stabilește țintele.
+
+Ținta pe luna curentă pentru fiecare categorie și cât s-a colectat până acum. Țintele le stabilește
+administratorul.
 
 ![Obiective lunare](docs/screenshots/05-obiective.png)
 
 ### Profil și istoric
-Cât ai reciclat tu și lista tuturor contribuțiilor tale.
+
+Totalul colectat de utilizator și lista înregistrărilor lui.
 
 ![Profil și istoric](docs/screenshots/06-profil.png)
 
-### Categorii *(administrator)*
-Adaugi, redenumești sau ștergi categorii de deșeuri și le alegi culoarea.
+### Categorii
+
+Doar pentru administrator. Adăugarea, modificarea și ștergerea categoriilor de deșeuri.
 
 ![Categorii](docs/screenshots/07-categorii.png)
 
-### Utilizatori *(administrator)*
-Creezi conturi, schimbi rolul (utilizator / administrator), dezactivezi un cont sau resetezi o parolă.
+### Utilizatori
+
+Doar pentru administrator. Crearea conturilor, schimbarea rolului, dezactivarea unui cont și resetarea
+parolei.
 
 ![Utilizatori](docs/screenshots/08-utilizatori.png)
 
----
+## Probleme frecvente
 
-## ❓ Dacă ceva nu merge
+| Mesaj | Soluție |
+|-------|---------|
+| Java nu este instalat | Instalează Java (pasul 1), apoi pornește din nou `porneste.bat`. |
+| Docker Desktop nu este instalat | Instalează Docker Desktop (pasul 1), apoi pornește din nou `porneste.bat`. |
+| Docker Desktop nu a pornit | Deschide Docker Desktop din meniul Start, așteaptă mesajul „Engine running”, apoi pornește din nou `porneste.bat`. |
+| Nu se poate conecta la baza de date | Închide aplicația și pornește din nou `porneste.bat`. |
+| Dublu-click pe `porneste.bat` nu face nimic | Arhiva ZIP nu a fost extrasă. Vezi pasul 2. |
 
-| Ce vezi | Ce faci |
-|---------|---------|
-| *Java nu este instalat* | Instalează Java (Pasul 1) și rulează din nou `porneste.bat` |
-| *Docker Desktop nu este instalat* | Instalează Docker Desktop (Pasul 1) și rulează din nou `porneste.bat` |
-| *Docker Desktop nu a pornit* | Deschide Docker Desktop din meniul Start, așteaptă „Engine running”, apoi rulează din nou `porneste.bat` |
-| În aplicație: *Nu se poate conecta la baza de date* | Închide aplicația și pornește din nou cu `porneste.bat` |
-| Nu merge nimic când dai dublu-click | Verifică că ai **extras** arhiva ZIP (Pasul 2) — nu rula `porneste.bat` din interiorul arhivei |
-| Altă eroare | Fă o poză la fereastra neagră și trimite-o echipei |
+Pentru alte erori, trimite echipei o captură a ferestrei `porneste.bat`.
 
----
+## Dezvoltatori
 
-## 👩‍💻 Pentru dezvoltatori
+Configurare, rulare din IntelliJ, baza de date, teste și arhitectură: [docs/DEZVOLTATORI.md](docs/DEZVOLTATORI.md).
 
-Configurare, rulare din IntelliJ / terminal, baza de date, teste, arhitectură și securitate:
-**[docs/DEZVOLTATORI.md](docs/DEZVOLTATORI.md)**.
+## Echipa
 
-## 👥 Echipa
-
-- [00NYXth](https://github.com/00NYXth) — Valentin
+- Valentin ([00NYXth](https://github.com/00NYXth))
 - [Mihail-pro](https://github.com/Mihail-pro)

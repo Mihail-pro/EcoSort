@@ -50,7 +50,7 @@ Rulați cu un cont care poate crea baze de date și utilizatori (de ex. `root`):
 
 ### MySQL Workbench
 
-Deschideți fiecare fișier (File → Open SQL Script) în ordinea de mai sus și executați-l cu ⚡ (Execute All).
+Deschideți fiecare fișier (File → Open SQL Script) în ordinea de mai sus și executați-l cu Query → Execute (All or Selection).
 Pentru pasul 10, în **același tab**, rulați întâi:
 
 ```sql

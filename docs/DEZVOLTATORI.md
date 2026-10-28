@@ -116,13 +116,13 @@ MySQL        tabele, constrângeri, proceduri stocate (database/)
 ### Roluri
 
 | Funcție | Utilizator | Administrator |
-|---------|:----------:|:-------------:|
-| Înregistrare deșeu, profil și istoric propriu | ✔ | ✔ |
-| Editare / ștergere înregistrări | doar proprii | toate |
-| Statistici (grafice pentru tot colegiul) | ✔ | ✔ |
+|---------|------------|---------------|
+| Înregistrare deșeu, profil și istoric propriu | da | da |
+| Editare și ștergere înregistrări | doar proprii | toate |
+| Statistici (grafice pentru tot colegiul) | da | da |
 | Obiective lunare | vizualizare | vizualizare și setare |
 | Puncte de colectare pe hartă | vizualizare | adăugare și ștergere |
-| Categorii, utilizatori | — | ✔ |
+| Categorii, utilizatori | nu | da |
 
 ## Securitate
 
