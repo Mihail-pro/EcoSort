@@ -1,0 +1,33 @@
+# EcoSort — serverul MySQL într-un container Docker.
+#
+#   docker compose up -d      pornește MySQL; la prima pornire creează baza din database/
+#   docker compose down       oprește serverul (datele rămân în volumul ecosort-mysql)
+#   docker compose down -v    oprește serverul și ȘTERGE baza de date
+#
+# Valorile vin din fișierul .env (același pe care îl citește aplicația).
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      # Parola root e generată aleator (apare o singură dată în `docker compose logs mysql`);
+      # aplicația nu o folosește.
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      ECOSORT_DB_USER: ${ECOSORT_DB_USER:?Completați ECOSORT_DB_USER în .env}
+      ECOSORT_DB_PASSWORD: ${ECOSORT_DB_PASSWORD:?Completați ECOSORT_DB_PASSWORD în .env}
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_ai_ci"]
+    ports:
+      # Doar de pe acest calculator.
+      - "127.0.0.1:${ECOSORT_DB_PORT:-3306}:3306"
+    volumes:
+      - ecosort-mysql:/var/lib/mysql
+      - ./database:/ecosort-db:ro
+      - ./database/docker/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 --silent"]
+      interval: 5s
+      retries: 30
+
+volumes:
+  ecosort-mysql:

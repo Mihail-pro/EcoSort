@@ -13,14 +13,15 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
+import md.ecosort.ecosort.model.Utilizator;
+import md.ecosort.ecosort.service.AuthService;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class LoginView extends StackPane {
 
-    // Datele administratorului (le poți schimba aici)
-    private static final String ADMIN_USER = "admin";
-    private static final String ADMIN_PAROLA = "admin123";
+    private final AuthService auth = new AuthService();
 
     // Se execută după autentificare reușită și primește utilizatorul logat
     private final Consumer<Utilizator> laLoginReusit;
@@ -28,6 +29,13 @@ public class LoginView extends StackPane {
     private PasswordField txtParola = new PasswordField();
     private Label lblEroare = new Label();
     private VBox card = new VBox(8);
+
+    // Câmpuri afișate doar la prima pornire, când trebuie creat primul administrator
+    private final TextField txtNume = new TextField();
+    private final PasswordField txtConfirmare = new PasswordField();
+    private final Label subtitlu = new Label("AUTENTIFICARE");
+    private final Button btnLogin = new Button("Autentificare  →");
+    private boolean modConfigurare = false;
 
     // Culorile folosite în pagină
     private final Color VERDE = Color.web("#10b981");
@@ -53,7 +61,6 @@ public class LoginView extends StackPane {
         titlu.setFont(Font.font("Arial", FontWeight.BOLD, 28));
         titlu.setTextFill(VERDE_INCHIS);
 
-        Label subtitlu = new Label("AUTENTIFICARE ADMINISTRATOR");
         subtitlu.setFont(Font.font("Arial", FontWeight.BOLD, 10));
         subtitlu.setTextFill(VERDE);
 
@@ -64,16 +71,19 @@ public class LoginView extends StackPane {
         // Câmpurile de logare
         txtUser.setPromptText("Introdu numele de utilizator");
         txtParola.setPromptText("Introdu parola");
+        txtNume.setPromptText("Numele și prenumele");
+        txtConfirmare.setPromptText("Repetă parola");
 
         formeazaCamp(txtUser);
         formeazaCamp(txtParola);
+        formeazaCamp(txtNume);
+        formeazaCamp(txtConfirmare);
 
         // Mesaj de eroare
         lblEroare.setTextFill(Color.RED);
         lblEroare.setWrapText(true);
 
         // BUTON
-        Button btnLogin = new Button("Autentificare  →");
         btnLogin.setMaxWidth(Double.MAX_VALUE);
         btnLogin.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         btnLogin.setTextFill(Color.WHITE);
@@ -107,6 +117,31 @@ public class LoginView extends StackPane {
         getChildren().addAll(creeazaFundalAnimat(), card);
 
         aparitieCard();
+        verificaConfigurare();
+    }
+
+    // La prima pornire (niciun administrator în baza de date) formularul devine "creare administrator".
+    private void verificaConfigurare() {
+        btnLogin.setDisable(true);
+        Async.executa(auth::necesitaConfigurare, necesita -> {
+            btnLogin.setDisable(false);
+            if (necesita) activeazaModConfigurare();
+        }, mesaj -> {
+            btnLogin.setDisable(false);
+            lblEroare.setText(mesaj);
+        });
+    }
+
+    private void activeazaModConfigurare() {
+        modConfigurare = true;
+        subtitlu.setText("PRIMA PORNIRE — CREEAZĂ CONTUL DE ADMINISTRATOR");
+        btnLogin.setText("Creează administratorul  →");
+        int pozitie = card.getChildren().indexOf(lblEroare);
+        card.getChildren().addAll(pozitie, java.util.List.of(
+                eticheta("NUME COMPLET"), txtNume,
+                eticheta("CONFIRMĂ PAROLA"), txtConfirmare));
+        txtParola.setOnAction(e -> txtConfirmare.requestFocus());
+        txtConfirmare.setOnAction(e -> login());
     }
 
     // Cercuri verzi transparente care plutesc în fundal
@@ -194,18 +229,45 @@ public class LoginView extends StackPane {
 
 
     private void login() {
-        String user = txtUser.getText().trim();
-        String parola = txtParola.getText();
+        if (btnLogin.isDisabled()) return;
 
-        if (user.isEmpty() || parola.isEmpty()) {
-            lblEroare.setText("Completează toate câmpurile!");
-            scutura();
-        } else if (!user.equals(ADMIN_USER) || !parola.equals(ADMIN_PAROLA)) {
-            lblEroare.setText("Nume de utilizator sau parolă incorectă!");
-            scutura();
-        } else {
-            // Autentificare reușită -> trimitem administratorul către dashboard
-            laLoginReusit.accept(new Utilizator(user, "Administrator"));
+        String user = txtUser.getText().trim();
+        String nume = txtNume.getText();
+        char[] parola = txtParola.getText().toCharArray();
+        char[] confirmare = txtConfirmare.getText().toCharArray();
+
+        if (user.isEmpty() || parola.length == 0 || (modConfigurare && (nume.isBlank() || confirmare.length == 0))) {
+            eroare("Completează toate câmpurile!");
+            return;
         }
+
+        lblEroare.setText("");
+        btnLogin.setDisable(true);
+        boolean configurare = modConfigurare;
+        Async.executa(() -> {
+            try {
+                // Verificarea Argon2id durează intenționat ~0,1 s: rulează pe firul de fundal.
+                return configurare
+                        ? auth.creeazaPrimulAdmin(user, nume, parola, confirmare)
+                        : auth.autentifica(user, parola);
+            } finally {
+                Arrays.fill(parola, '\0');
+                Arrays.fill(confirmare, '\0');
+            }
+        }, utilizator -> {
+            txtParola.clear();
+            txtConfirmare.clear();
+            laLoginReusit.accept(utilizator);
+        }, mesaj -> {
+            btnLogin.setDisable(false);
+            txtParola.clear();
+            txtConfirmare.clear();
+            eroare(mesaj);
+        });
+    }
+
+    private void eroare(String mesaj) {
+        lblEroare.setText(mesaj);
+        scutura();
     }
 }

@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -17,8 +18,14 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Scale;
+import md.ecosort.ecosort.model.Categorie;
+import md.ecosort.ecosort.model.PunctColectare;
+import md.ecosort.ecosort.service.ColectareService;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InteractiveMap extends BorderPane {
 
@@ -58,7 +65,20 @@ public class InteractiveMap extends BorderPane {
     private final BorderPane toolBar = new BorderPane();
     private final Scale mapScale = new Scale(1, 1);
 
-    public InteractiveMap() {
+    // Încăperile care pot găzdui un punct de colectare, după cheia "etaj|bloc|încăpere".
+    private record Incapere(Pane bloc, double centruX, double centruY) { }
+
+    private final ColectareService service;
+    private final boolean esteAdmin;
+    private final Map<String, Incapere> incaperi = new HashMap<>();
+    private final List<Node> marcaje = new ArrayList<>();
+    private final Button btnAdaugaPunctColectare = new Button("+ Punct colectare");
+    private int etajCurent;
+    private boolean modAdaugare = false;
+
+    public InteractiveMap(ColectareService service, boolean esteAdmin) {
+        this.service = service;
+        this.esteAdmin = esteAdmin;
         Pane[] bloc_A = new Pane[numar_etaje];
         Pane[] bloc_B = new Pane[numar_etaje];
         Pane[] bloc_C = new Pane[numar_etaje];
@@ -68,6 +88,7 @@ public class InteractiveMap extends BorderPane {
         for (int i = 0; i < numar_etaje; i++) {
             Pane etaj = creeazaEtaj();
             etaje.add(etaj);
+            etajCurent = i + 1;
 
             bloc_A[i] = creeazaBloc(etaj, "Blocul A", Coordonate_bloc_A[i]);
             bloc_B[i] = creeazaBloc(etaj, "Blocul B", Coordonate_bloc_B[i]);
@@ -129,7 +150,10 @@ public class InteractiveMap extends BorderPane {
 
         Button btnZoom = new Button("Zoom");
 
-        Button btnAdaugaPunctColectare = new Button("+ Punct colectare");
+        // Doar administratorul amplasează coșuri: butonul activează alegerea unei încăperi pe hartă.
+        btnAdaugaPunctColectare.setVisible(esteAdmin);
+        btnAdaugaPunctColectare.setManaged(esteAdmin);
+        btnAdaugaPunctColectare.setOnAction(e -> seteazaModAdaugare(!modAdaugare));
         HBox unelteEco = new HBox(10, btnAdaugaPunctColectare);
         unelteEco.setAlignment(Pos.CENTER);
 
@@ -480,7 +504,7 @@ public class InteractiveMap extends BorderPane {
 
         // Grupare figura geometrica cu text
         Group grupIncapere = new Group(rectangle, text);
-        interactiv(grupIncapere, rectangle, culoareFundal, cod, nume);
+        interactiv(bloc, grupIncapere, rectangle, culoareFundal, cod, nume);
         bloc.getChildren().add(grupIncapere);
     }
 
@@ -499,7 +523,7 @@ public class InteractiveMap extends BorderPane {
 
         // Grup de încăpere în formă de poligon cu nume
         Group grupIncapere = new Group(polygon, text);
-        interactiv(grupIncapere, polygon, culoareFundal, cod, nume);
+        interactiv(bloc, grupIncapere, polygon, culoareFundal, cod, nume);
         bloc.getChildren().add(grupIncapere);
     }
 
@@ -552,11 +576,121 @@ public class InteractiveMap extends BorderPane {
         text.setY(centruY);
     }
 
-    private void interactiv(Group grup, Shape forma, Color culoareFundal, String cod, String nume) {
+    private void interactiv(Pane bloc, Group grup, Shape forma, Color culoareFundal, String cod, String nume) {
+        String cheie = cheieIncapere(cod, nume);
+        String literaBloc = bloc.getId().replace("Blocul ", "");
+        int etaj = etajCurent;
+        if (cheie != null) {
+            // Prima încăpere cu o anumită cheie primește marcajele (unele încăperi sunt desenate din mai multe forme).
+            incaperi.putIfAbsent(etaj + "|" + literaBloc + "|" + cheie, new Incapere(bloc,
+                    forma.getLayoutBounds().getCenterX(), forma.getLayoutBounds().getCenterY()));
+        }
+
         grup.setCursor(Cursor.HAND);
         grup.setOnMouseEntered(e -> forma.setFill(culoareFundal.darker()));
         grup.setOnMouseExited(e -> forma.setFill(culoareFundal));
-        grup.setOnMouseClicked(e -> afiseazaSelectie(cod, nume));
+        grup.setOnMouseClicked(e -> {
+            if (modAdaugare) {
+                seteazaModAdaugare(false);
+                if (cheie == null) {
+                    Async.arataEroare("Încăperea selectată nu are cod sau denumire pe hartă.");
+                } else {
+                    dialogPunctNou(literaBloc, etaj, cheie);
+                }
+            } else {
+                afiseazaSelectie(cod, nume);
+            }
+        });
+    }
+
+    // Identificatorul încăperii salvat în puncte_colectare.incapere: codul (fără ruperile de rând) sau denumirea.
+    static String cheieIncapere(String cod, String nume) {
+        if (cod != null && !cod.isBlank()) return cod.replace("-\n", "").replace("\n", " ").strip();
+        if (nume != null && !nume.isBlank()) return nume.strip();
+        return null;
+    }
+
+    private void seteazaModAdaugare(boolean activ) {
+        modAdaugare = activ;
+        btnAdaugaPunctColectare.setText(activ ? "Alege încăperea… (click pentru anulare)" : "+ Punct colectare");
+    }
+
+    private void dialogPunctNou(String bloc, int etaj, String incapere) {
+        Async.executa(service::categorii, categorii -> {
+            if (categorii.isEmpty()) {
+                Async.arataEroare("Adăugați mai întâi o categorie de deșeuri.");
+                return;
+            }
+            ComboBox<Categorie> cmbCategorie = new ComboBox<>();
+            cmbCategorie.getItems().setAll(categorii);
+            cmbCategorie.setValue(categorii.get(0));
+            TextField txtDenumire = new TextField();
+            txtDenumire.setPromptText("Denumirea coșului");
+            cmbCategorie.valueProperty().addListener((obs, vechi, c) ->
+                    txtDenumire.setText("Coș " + c.denumire().toLowerCase() + " — " + incapere));
+            txtDenumire.setText("Coș " + categorii.get(0).denumire().toLowerCase() + " — " + incapere);
+
+            VBox continut = new VBox(6, new Label("Categoria"), cmbCategorie, new Label("Denumire"), txtDenumire);
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Punct de colectare nou");
+            dialog.setHeaderText("Bloc " + bloc + ", etajul " + etaj + ", încăperea " + incapere);
+            dialog.getDialogPane().setContent(continut);
+            dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+            dialog.showAndWait().filter(b -> b == ButtonType.OK).ifPresent(b -> {
+                Categorie categorie = cmbCategorie.getValue();
+                String denumire = txtDenumire.getText();
+                Async.executa(() -> {
+                    service.adaugaPunct(denumire, bloc, etaj, incapere, categorie);
+                    return null;
+                }, v -> reincarcaPuncte());
+            });
+        });
+    }
+
+    // Reîncarcă din baza de date coșurile și le desenează ca cercuri colorate după categorie.
+    public void reincarcaPuncte() {
+        Async.executa(service::puncte, this::deseneazaPuncte);
+    }
+
+    private void deseneazaPuncte(List<PunctColectare> puncte) {
+        for (Node marcaj : marcaje) {
+            ((Pane) marcaj.getParent()).getChildren().remove(marcaj);
+        }
+        marcaje.clear();
+
+        Map<String, Integer> numarInIncapere = new HashMap<>();
+        for (PunctColectare p : puncte) {
+            String cheie = p.etaj() + "|" + p.bloc() + "|" + p.incapere();
+            Incapere incapere = incaperi.get(cheie);
+            if (incapere == null) continue; // încăperea nu (mai) există pe hartă
+
+            // Mai multe coșuri în aceeași încăpere se așază unul lângă altul.
+            int index = numarInIncapere.merge(cheie, 1, Integer::sum) - 1;
+            Circle marcaj = new Circle(incapere.centruX() - 6 + index * 9, incapere.centruY() + 9, 4.5,
+                    Color.web(p.categorie().culoare()));
+            marcaj.setStroke(Color.WHITE);
+            marcaj.setStrokeWidth(1.2);
+            Tooltip.install(marcaj, new Tooltip(p.denumire() + "\n" + p.categorie().denumire()
+                    + (esteAdmin ? "\n(click pentru ștergere)" : "")));
+            if (esteAdmin) {
+                marcaj.setCursor(Cursor.HAND);
+                marcaj.setOnMouseClicked(e -> {
+                    e.consume();
+                    Alert confirmare = new Alert(Alert.AlertType.CONFIRMATION,
+                            "Ștergi punctul „" + p.denumire() + "”? Înregistrările vechi rămân în istoric.",
+                            ButtonType.YES, ButtonType.NO);
+                    confirmare.setHeaderText("Ștergere punct de colectare");
+                    confirmare.showAndWait().filter(b -> b == ButtonType.YES).ifPresent(b -> Async.executa(() -> {
+                        service.stergePunct(p.id());
+                        return null;
+                    }, v -> reincarcaPuncte()));
+                });
+            } else {
+                marcaj.setMouseTransparent(true);
+            }
+            incapere.bloc().getChildren().add(marcaj);
+            marcaje.add(marcaj);
+        }
     }
 
     private void afiseazaSelectie(String cod, String nume) {
