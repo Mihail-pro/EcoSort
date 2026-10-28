@@ -13,29 +13,107 @@ colectare, statistici, obiective lunare și administrarea categoriilor și a con
 - **Docker Desktop** (recomandat) sau MySQL Server 8.0.16+
 - Maven nu e necesar: proiectul include `mvnw`
 
-## Pornire rapidă (Docker)
+## Cum rulezi proiectul pe un alt calculator (pas cu pas)
+
+> Pe GitHub se află doar fișierele proiectului, nu și baza de date. Docker construiește pe calculatorul tău
+> o bază **nouă**, cu aceeași structură și cu datele demonstrative (categorii, coșuri). Conturile și
+> înregistrările de pe alte calculatoare nu se transferă.
+
+### Pasul 1 — Instalează programele necesare (o singură dată)
+
+| Program | De unde | Verificare în terminal |
+|---------|---------|------------------------|
+| Git | <https://git-scm.com> | `git --version` |
+| Java JDK 21 sau mai nou | <https://adoptium.net> | `java -version` |
+| Docker Desktop | <https://www.docker.com/products/docker-desktop> | `docker --version` |
+
+După instalare, **deschide Docker Desktop** și așteaptă mesajul „Engine running”. Pe Windows, la prima
+instalare, Docker poate cere activarea WSL 2 sau o repornire — urmează instrucțiunile lui.
+MySQL **nu** trebuie instalat separat.
+
+### Pasul 2 — Descarcă proiectul
+
+Deschide un terminal (PowerShell / Command Prompt) în folderul unde vrei proiectul:
 
 ```bash
 git clone https://github.com/Mihail-pro/EcoSort.git
 cd EcoSort
-cp .env.example .env          # Windows: copy .env.example .env  — apoi completați ECOSORT_DB_PASSWORD
-docker compose up -d          # pornește MySQL și creează automat baza de date
-./mvnw javafx:run             # Windows: mvnw.cmd javafx:run
 ```
 
-La prima pornire, containerul rulează scripturile din `database/`: tabele, constrângeri, proceduri, date
-demonstrative și contul aplicației (`ECOSORT_DB_USER` / `ECOSORT_DB_PASSWORD` din `.env`, doar `EXECUTE`).
-Datele rămân în volumul Docker `ecosort-mysql` între reporniri; serverul pornește automat odată cu Docker.
+### Pasul 3 — Creează fișierul de configurare `.env`
 
-| Comandă | Efect |
-|---------|-------|
-| `docker compose up -d` | pornește serverul |
-| `docker compose down` | îl oprește (datele rămân) |
-| `docker compose down -v` | îl oprește și **șterge** baza (la următorul `up` se recreează de la zero) |
+```bash
+copy .env.example .env        # Linux / macOS: cp .env.example .env
+notepad .env                  # Linux / macOS: nano .env
+```
 
-Dacă portul 3306 e ocupat de un MySQL instalat local, puneți alt port în `.env` (ex. `ECOSORT_DB_PORT=3310`).
-Contul aplicației se creează doar la prima inițializare: dacă schimbați ulterior utilizatorul sau parola din
-`.env`, rulați `docker compose down -v` și apoi `up -d`.
+Completează parola (minim 8 caractere) și salvează:
+
+```
+ECOSORT_DB_HOST=127.0.0.1
+ECOSORT_DB_PORT=3306
+ECOSORT_DB_NAME=ecosort
+ECOSORT_DB_USER=ecosort_app
+ECOSORT_DB_PASSWORD=OParolaAleasaDeTine
+```
+
+Dacă pe calculator este deja instalat MySQL, portul 3306 e ocupat: pune `ECOSORT_DB_PORT=3310`.
+`.env` este în `.gitignore` și nu ajunge pe GitHub.
+
+### Pasul 4 — Pornește baza de date
+
+```bash
+docker compose up -d --wait
+```
+
+Prima dată durează 1–2 minute (se descarcă imaginea MySQL și se creează baza). E gata când comanda se
+termină cu `Container ecosort-mysql-1 Healthy`. Verificare opțională:
+
+```bash
+docker compose logs mysql     # trebuie să apară: [EcoSort] Baza de date este gata.
+```
+
+### Pasul 5 — Pornește aplicația
+
+**Din terminal** (în folderul `EcoSort`):
+
+```bash
+mvnw.cmd javafx:run           # Linux / macOS: ./mvnw javafx:run
+```
+
+**Din IntelliJ IDEA:** *File → Open* → folderul `EcoSort` (IntelliJ recunoaște proiectul Maven și descarcă
+bibliotecile), apoi alege configurarea **EcoSortApplication** din dreapta-sus și apasă ▶ *Run*.
+Aplicația caută `.env` în directorul de lucru — lăsați „Working directory” pe rădăcina proiectului.
+
+Prima rulare durează câteva minute (se descarcă bibliotecile Java).
+
+### Pasul 6 — Prima autentificare
+
+Ecranul de login apare cu titlul **„PRIMA PORNIRE — CREEAZĂ CONTUL DE ADMINISTRATOR”**. Completează numele
+de utilizator, numele complet și parola — acesta devine administratorul. Celelalte conturi se creează din
+meniul **Utilizatori**.
+
+### Folosirea de zi cu zi
+
+| Ce vrei | Comandă |
+|---------|---------|
+| Pornești aplicația | `mvnw.cmd javafx:run` (sau ▶ în IntelliJ) |
+| Oprești baza de date | `docker compose down` — datele rămân |
+| Pornești din nou baza | `docker compose up -d` |
+| Ștergi baza și o iei de la zero | `docker compose down -v`, apoi `docker compose up -d` |
+
+După repornirea calculatorului, baza pornește singură, dacă Docker Desktop este deschis.
+
+### Dacă ceva nu merge
+
+| Problemă | Soluție |
+|----------|---------|
+| `port is already allocated` | Schimbă `ECOSORT_DB_PORT` în `.env` (ex. 3310) și rulează din nou `docker compose up -d` |
+| `Completați ECOSORT_DB_PASSWORD în .env` | Lipsește parola din `.env` (Pasul 3) |
+| În aplicație: „Nu se poate conecta la baza de date” | Docker Desktop nu e pornit sau containerul e oprit → `docker compose up -d` |
+| În aplicație: „Lipsește configurația ECOSORT_DB_…” | `.env` lipsește sau aplicația e pornită din alt folder decât rădăcina proiectului |
+| „Acces refuzat la baza de date” | Parola din `.env` a fost schimbată după crearea bazei → `docker compose down -v` și `docker compose up -d` (**șterge datele**) |
+| `java` / `git` / `docker` nu e recunoscut | Programul nu e instalat sau terminalul a fost deschis înainte de instalare — redeschide-l |
 
 ## Instalare fără Docker
 
