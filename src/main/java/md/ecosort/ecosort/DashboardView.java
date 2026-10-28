@@ -237,6 +237,8 @@ public class DashboardView extends BorderPane {
 
         PieChart graficPie = new PieChart();
         graficPie.setTitle("Pe categorii (tot colegiul)");
+        // Feliile primesc culoarea categoriei; legenda implicită ar folosi alte culori, iar numele apar oricum pe felii.
+        graficPie.setLegendVisible(false);
 
         BarChart<String, Number> graficBare = new BarChart<>(new CategoryAxis(), new NumberAxis());
         graficBare.setTitle("Volum reciclat (kg)");
@@ -273,9 +275,13 @@ public class DashboardView extends BorderPane {
                 XYChart.Series<String, Number> serie = new XYChart.Series<>();
                 for (Map.Entry<Categorie, BigDecimal> t : totaluri.entrySet()) {
                     double valoare = t.getValue().doubleValue();
-                    if (valoare > 0) graficPie.getData().add(new PieChart.Data(t.getKey().denumire(), valoare));
-                    XYChart.Data<String, Number> bara = new XYChart.Data<>(t.getKey().denumire(), valoare);
                     String culoare = t.getKey().culoare();
+                    if (valoare > 0) {
+                        PieChart.Data felie = new PieChart.Data(t.getKey().denumire(), valoare);
+                        graficPie.getData().add(felie);
+                        felie.getNode().setStyle("-fx-pie-color: " + culoare + ";");
+                    }
+                    XYChart.Data<String, Number> bara = new XYChart.Data<>(t.getKey().denumire(), valoare);
                     bara.nodeProperty().addListener((obs, vechi, nod) -> {
                         if (nod != null) nod.setStyle("-fx-bar-fill: " + culoare + ";");
                     });
@@ -391,7 +397,7 @@ public class DashboardView extends BorderPane {
                     text += "   ✔ obiectiv atins!";
                 }
 
-                HBox rand = new HBox(15, nume, bara(p.procent(), 300), new Label(text));
+                HBox rand = new HBox(15, nume, bara(p.procent(), 300, culoare(p.categorie())), new Label(text));
                 rand.setAlignment(Pos.CENTER_LEFT);
                 zonaProgres.getChildren().add(rand);
             }
@@ -668,6 +674,7 @@ public class DashboardView extends BorderPane {
     private ComboBox<PunctColectare> comboPunct() {
         ComboBox<PunctColectare> cmb = new ComboBox<>();
         cmb.setMaxWidth(Double.MAX_VALUE);
+        cmb.setPromptText("Fără punct anume");
         cmb.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(PunctColectare p, boolean gol) {
@@ -763,7 +770,7 @@ public class DashboardView extends BorderPane {
         });
     }
 
-    private StackPane bara(double procent, double latime) {
+    private StackPane bara(double procent, double latime, Color culoare) {
         Rectangle gol = new Rectangle(latime, 14);
         gol.setArcWidth(14);
         gol.setArcHeight(14);
@@ -772,7 +779,7 @@ public class DashboardView extends BorderPane {
         Rectangle plin = new Rectangle(latime * Math.min(procent, 1.0), 14);
         plin.setArcWidth(14);
         plin.setArcHeight(14);
-        plin.setFill(VERDE);
+        plin.setFill(culoare);
 
         StackPane bara = new StackPane(gol, plin);
         bara.setAlignment(Pos.CENTER_LEFT);

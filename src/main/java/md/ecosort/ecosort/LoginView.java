@@ -136,10 +136,13 @@ public class LoginView extends StackPane {
         modConfigurare = true;
         subtitlu.setText("PRIMA PORNIRE — CREEAZĂ CONTUL DE ADMINISTRATOR");
         btnLogin.setText("Creează administratorul  →");
-        int pozitie = card.getChildren().indexOf(lblEroare);
-        card.getChildren().addAll(pozitie, java.util.List.of(
-                eticheta("NUME COMPLET"), txtNume,
-                eticheta("CONFIRMĂ PAROLA"), txtConfirmare));
+        // Ordinea câmpurilor: utilizator, nume complet, parolă, confirmare parolă.
+        card.getChildren().addAll(card.getChildren().indexOf(txtUser) + 1,
+                java.util.List.of(eticheta("NUME COMPLET"), txtNume));
+        card.getChildren().addAll(card.getChildren().indexOf(txtParola) + 1,
+                java.util.List.of(eticheta("CONFIRMĂ PAROLA"), txtConfirmare));
+        txtUser.setOnAction(e -> txtNume.requestFocus());
+        txtNume.setOnAction(e -> txtParola.requestFocus());
         txtParola.setOnAction(e -> txtConfirmare.requestFocus());
         txtConfirmare.setOnAction(e -> login());
     }

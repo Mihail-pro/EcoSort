@@ -1,3 +1,5 @@
 # Scripturile shell rulează în containerul Linux: trebuie să rămână cu LF și pe Windows.
 *.sh text eol=lf
 mvnw text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
