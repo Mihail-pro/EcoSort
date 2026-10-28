@@ -3,9 +3,17 @@
 
 # EcoSort — Evidența colectării selective a deșeurilor
 
+![EcoSort — hartă, coșuri de colectare, statistici și obiective lunare](docs/ecosort-banner.png)
+
 Aplicație desktop JavaFX pentru CEITI: înregistrarea deșeurilor predate, harta colegiului cu punctele de
 colectare, statistici, obiective lunare și administrarea categoriilor și a conturilor. Datele sunt păstrate
 într-o bază MySQL accesată prin JDBC și proceduri stocate.
+
+### Captură din aplicație
+
+Harta etajului 1 cu punctele de colectare, colorate după categoria de deșeuri:
+
+![Ecranul „Hartă și Coșuri” din EcoSort](docs/screenshots/ecosort-harta.png)
 
 ## Cerințe
 
