@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.EcoSort" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/eco_bg</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <color name="eco_bg">#0F172A</color>
+    <color name="eco_launcher_bg">#047857</color>
+</resources>
