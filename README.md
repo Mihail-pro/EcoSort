@@ -8,6 +8,8 @@ EcoSort este o aplicație desktop în care se înregistrează deșeurile predate
 sticlă, metal, baterii). Aplicația arată pe harta colegiului unde sunt coșurile de colectare și cât s-a
 colectat în fiecare lună.
 
+Pentru lucrătorii care golesc coșurile există și o [aplicație mobilă Android](#aplicația-mobilă).
+
 ## Participanți
 
 - Marțenco Mihail — [@Mihail-pro](https://github.com/Mihail-pro)
@@ -105,6 +107,23 @@ Doar pentru administrator. Crearea conturilor, schimbarea rolului, dezactivarea 
 parolei.
 
 ![Utilizatori](docs/screenshots/08-utilizatori.png)
+
+## Aplicația mobilă
+
+Aplicația Android EcoSort Mobile (folderul [`mobile/`](mobile/)) este pentru lucrătorii care golesc coșurile.
+Pe harta colegiului vede ce coșuri sunt pline, scanează codul QR al coșului și confirmă golirea. Umplerea și
+greutatea sunt măsurate de senzorii coșului, iar fiecare golire ajunge în istoric și în statistici.
+
+<p align="center">
+  <img src="mobile/docs/screenshots/02-harta.png" width="230" alt="Harta coșurilor">
+  &nbsp;
+  <img src="mobile/docs/screenshots/07-qr-validat.png" width="230" alt="Golirea unui coș">
+  &nbsp;
+  <img src="mobile/docs/screenshots/10-statistici.png" width="230" alt="Statistici">
+</p>
+
+Este o versiune Beta (prototip demo) cu date simulate local. Descrierea completă, toate ecranele și pașii de
+rulare: [mobile/README.md](mobile/README.md).
 
 ## Probleme frecvente
 
