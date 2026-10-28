@@ -8,6 +8,13 @@ EcoSort este o aplicație desktop în care se înregistrează deșeurile predate
 sticlă, metal, baterii). Aplicația arată pe harta colegiului unde sunt coșurile de colectare și cât s-a
 colectat în fiecare lună.
 
+## Participanți
+
+- Marțenco Mihail — [@Mihail-pro](https://github.com/Mihail-pro)
+- Ghilan Adrian — [@ghilanadrian7-prog](https://github.com/ghilanadrian7-prog)
+- Găină Valentin — [@00NYXth](https://github.com/00NYXth)
+- Lazari Daniel — [@FROZEN263](https://github.com/FROZEN263)
+
 ## Instalare și pornire
 
 ### 1. Instalează Java și Docker Desktop
@@ -114,8 +121,3 @@ Pentru alte erori, trimite echipei o captură a ferestrei `porneste.bat`.
 ## Dezvoltatori
 
 Configurare, rulare din IntelliJ, baza de date, teste și arhitectură: [docs/DEZVOLTATORI.md](docs/DEZVOLTATORI.md).
-
-## Echipa
-
-- Valentin ([00NYXth](https://github.com/00NYXth))
-- [Mihail-pro](https://github.com/Mihail-pro)
