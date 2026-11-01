@@ -1,5 +1,8 @@
 package md.ecosort.ecosort;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
@@ -18,10 +21,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Scale;
+import javafx.util.Duration;
 import md.ecosort.ecosort.model.Categorie;
 import md.ecosort.ecosort.model.PunctColectare;
+import md.ecosort.ecosort.model.StareCos;
 import md.ecosort.ecosort.service.ColectareService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,9 +82,26 @@ public class InteractiveMap extends BorderPane {
     private int etajCurent;
     private boolean modAdaugare = false;
 
+    private final Map<Integer, Circle> marcajPeId = new HashMap<>();
+    private final Map<Integer, Circle> haloPeId = new HashMap<>();
+    private final Map<Integer, Tooltip> tooltipPeId = new HashMap<>();
+    private final Map<Integer, PunctColectare> punctPeId = new HashMap<>();
+    private Map<Integer, StareCos> stare = Map.of();
+    private Timeline sondaj;
+
+    private static final Color INEL_VERDE = Color.web("#16a34a"), INEL_PORTOCALIU = Color.web("#f59e0b"),
+            INEL_ROSU = Color.web("#dc2626"), INEL_GRI = Color.web("#9ca3af");
+
     public InteractiveMap(ColectareService service, boolean esteAdmin) {
         this.service = service;
         this.esteAdmin = esteAdmin;
+
+        sondaj = new Timeline(new KeyFrame(Duration.seconds(5), e -> reincarcaStarea()));
+        sondaj.setCycleCount(Animation.INDEFINITE);
+        sceneProperty().addListener((obs, veche, noua) -> {
+            if (noua == null) sondaj.stop(); else sondaj.play();
+        });
+
         Pane[] bloc_A = new Pane[numar_etaje];
         Pane[] bloc_B = new Pane[numar_etaje];
         Pane[] bloc_C = new Pane[numar_etaje];
@@ -755,7 +778,20 @@ public class InteractiveMap extends BorderPane {
 
     // Reîncarcă din baza de date coșurile și le desenează ca cercuri colorate după categorie.
     public void reincarcaPuncte() {
-        Async.executa(service::puncte, this::deseneazaPuncte);
+        Async.executa(service::puncte, puncte -> {
+            deseneazaPuncte(puncte);
+            reincarcaStarea();
+        });
+    }
+
+    public void reincarcaStarea() {
+        // Varianta cu 3 argumente: o pană de rețea nu trebuie să deschidă o alertă la fiecare 5 secunde.
+        Async.executa(service::stareCosuri, lista -> {
+            Map<Integer, StareCos> nou = new HashMap<>();
+            for (StareCos s : lista) nou.put(s.punctId(), s);
+            stare = nou;
+            for (Integer id : marcajPeId.keySet()) actualizeazaMarcaj(id);
+        }, mesaj -> System.err.println("Starea coșurilor nu a putut fi citită: " + mesaj));
     }
 
     private void deseneazaPuncte(List<PunctColectare> puncte) {
@@ -763,40 +799,138 @@ public class InteractiveMap extends BorderPane {
             ((Pane) marcaj.getParent()).getChildren().remove(marcaj);
         }
         marcaje.clear();
+        marcajPeId.clear(); haloPeId.clear(); tooltipPeId.clear(); punctPeId.clear();
 
         Map<String, Integer> numarInIncapere = new HashMap<>();
         for (PunctColectare p : puncte) {
             String cheie = p.etaj() + "|" + p.bloc() + "|" + p.incapere();
             Incapere incapere = incaperi.get(cheie);
-            if (incapere == null) continue; // încăperea nu (mai) există pe hartă
+            if (incapere == null) continue;
 
-            // Mai multe coșuri în aceeași încăpere se așază unul lângă altul.
             int index = numarInIncapere.merge(cheie, 1, Integer::sum) - 1;
-            Circle marcaj = new Circle(incapere.centruX() - 6 + index * 9, incapere.centruY() + 9, 4.5,
+            Circle marcaj = new Circle(incapere.centruX() - 6 + index * 16, incapere.centruY() + 9, 4.5,
                     Color.web(p.categorie().culoare()));
             marcaj.setStroke(Color.WHITE);
             marcaj.setStrokeWidth(1.2);
-            Tooltip.install(marcaj, new Tooltip(p.denumire() + "\n" + p.categorie().denumire()
-                    + (esteAdmin ? "\n(click pentru ștergere)" : "")));
+
+            Circle halo = new Circle(marcaj.getCenterX(), marcaj.getCenterY(), 7.5, Color.TRANSPARENT);
+            halo.setMouseTransparent(true);
+            Tooltip tooltip = new Tooltip();
+            Tooltip.install(marcaj, tooltip);
+
             if (esteAdmin) {
                 marcaj.setCursor(Cursor.HAND);
                 marcaj.setOnMouseClicked(e -> {
                     e.consume();
-                    Alert confirmare = new Alert(Alert.AlertType.CONFIRMATION,
-                            "Ștergi punctul „" + p.denumire() + "”? Înregistrările vechi rămân în istoric.",
-                            ButtonType.YES, ButtonType.NO);
-                    confirmare.setHeaderText("Ștergere punct de colectare");
-                    confirmare.showAndWait().filter(b -> b == ButtonType.YES).ifPresent(b -> Async.executa(() -> {
-                        service.stergePunct(p.id());
-                        return null;
-                    }, v -> reincarcaPuncte()));
+                    meniuAdmin(p).show(marcaj, e.getScreenX(), e.getScreenY());
                 });
             } else {
                 marcaj.setMouseTransparent(true);
             }
-            incapere.bloc().getChildren().add(marcaj);
+
+            incapere.bloc().getChildren().addAll(halo, marcaj);
+            marcaje.add(halo);
             marcaje.add(marcaj);
+            marcajPeId.put(p.id(), marcaj);
+            haloPeId.put(p.id(), halo);
+            tooltipPeId.put(p.id(), tooltip);
+            punctPeId.put(p.id(), p);
+            actualizeazaMarcaj(p.id());
         }
+    }
+
+    private ContextMenu meniuAdmin(PunctColectare p) {
+        MenuItem leaga = new MenuItem("Leagă senzor…");
+        leaga.setOnAction(e -> dialogSenzor(p));
+
+        MenuItem dezleaga = new MenuItem("Dezleagă senzorul");
+        dezleaga.setDisable(!stare.containsKey(p.id()));
+        dezleaga.setOnAction(e -> Async.executa(() -> {
+            service.dezleagaSenzor(p);
+            return null;
+        }, v -> reincarcaStarea()));
+
+        MenuItem sterge = new MenuItem("Șterge punctul…");
+        sterge.setOnAction(e -> {
+            Alert confirmare = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Ștergi punctul „" + p.denumire() + "”? Înregistrările vechi rămân în istoric.",
+                    ButtonType.YES, ButtonType.NO);
+            confirmare.setHeaderText("Ștergere punct de colectare");
+            confirmare.showAndWait().filter(b -> b == ButtonType.YES).ifPresent(b -> Async.executa(() -> {
+                service.stergePunct(p.id());
+                return null;
+            }, v -> reincarcaPuncte()));
+        });
+        return new ContextMenu(leaga, dezleaga, sterge);
+    }
+
+    private void dialogSenzor(PunctColectare p) {
+        StareCos curent = stare.get(p.id());
+        TextField txtCod = new TextField(curent == null ? "" : curent.dispozitiv());
+        txtCod.setPromptText("ex. BIN-C1-01 (ca în firmware)");
+        ComboBox<Integer> cmbCanal = new ComboBox<>();
+        cmbCanal.getItems().setAll(1, 2, 3);
+        cmbCanal.setValue(curent == null ? 1 : curent.canal());
+        TextField txtCapacitate = new TextField(curent == null ? "10" : String.valueOf(curent.capacitateKg()));
+        TextField txtGol = new TextField("350");   // distanța afișată pe OLED cu coșul gol
+        TextField txtPlin = new TextField("50");   // distanța la nivelul la care îl considerați plin
+
+        VBox continut = new VBox(6, new Label("Cod dispozitiv"), txtCod, new Label("Canal (compartiment)"), cmbCanal,
+                new Label("Capacitate (kg)"), txtCapacitate, new Label("Distanță coș gol (mm)"), txtGol,
+                new Label("Distanță coș plin (mm)"), txtPlin);
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Senzor pentru coș");
+        dialog.setHeaderText(p.denumire());
+        dialog.getDialogPane().setContent(continut);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.showAndWait().filter(b -> b == ButtonType.OK).ifPresent(b -> {
+            String cod = txtCod.getText();
+            Integer canal = cmbCanal.getValue();
+            try {
+                BigDecimal capacitate = new BigDecimal(txtCapacitate.getText().trim().replace(',', '.'));
+                int gol = Integer.parseInt(txtGol.getText().trim());
+                int plin = Integer.parseInt(txtPlin.getText().trim());
+                Async.executa(() -> {
+                    service.leagaSenzor(p, cod, canal, capacitate, gol, plin);
+                    return null;
+                }, v -> reincarcaStarea());
+            } catch (NumberFormatException ex) {
+                Async.arataEroare("Capacitatea și distanțele trebuie să fie numere.");
+            }
+        });
+    }
+
+    private void actualizeazaMarcaj(int punctId) {
+        Circle halo = haloPeId.get(punctId);
+        Tooltip tooltip = tooltipPeId.get(punctId);
+        PunctColectare p = punctPeId.get(punctId);
+        if (halo == null || tooltip == null || p == null) return;
+
+        StringBuilder text = new StringBuilder(p.denumire()).append('\n').append(p.categorie().denumire());
+        StareCos s = stare.get(punctId);
+        halo.getStrokeDashArray().clear();
+        halo.setStrokeWidth(2.4);
+        if (s == null) {
+            halo.setStroke(Color.TRANSPARENT);
+        } else if (!s.arePrimitDate()) {
+            halo.setStroke(INEL_GRI);
+            halo.getStrokeDashArray().setAll(3.0, 2.5);
+            text.append("\nSenzor legat, încă fără date");
+        } else if (!s.esteOnline()) {
+            halo.setStroke(INEL_GRI);
+            halo.getStrokeDashArray().setAll(3.0, 2.5);
+            text.append("\nFără semnal de ").append(s.vechimeSecunde()).append(" s");
+        } else {
+            Integer pct = s.umplerePct();
+            halo.setStroke(pct == null ? INEL_GRI : pct >= 85 ? INEL_ROSU : pct >= 60 ? INEL_PORTOCALIU : INEL_VERDE);
+            text.append("\nUmplere: ").append(pct == null ? "necunoscută" : pct + "%");
+            if (s.greutateG() != null) {
+                text.append(String.format(java.util.Locale.ROOT, "\nGreutate: %.2f kg", s.greutateG() / 1000.0));
+            }
+            text.append("\nActualizat acum ").append(s.vechimeSecunde()).append(" s");
+        }
+        if (esteAdmin) text.append("\n(click pentru meniu)");
+        tooltip.setText(text.toString());
     }
 
     private void afiseazaSelectie(String cod, String nume) {

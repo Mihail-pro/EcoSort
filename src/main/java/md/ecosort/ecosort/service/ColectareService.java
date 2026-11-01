@@ -1,14 +1,7 @@
 package md.ecosort.ecosort.service;
 
-import md.ecosort.ecosort.model.Categorie;
-import md.ecosort.ecosort.model.Inregistrare;
-import md.ecosort.ecosort.model.ProgresLunar;
-import md.ecosort.ecosort.model.PunctColectare;
-import md.ecosort.ecosort.model.Utilizator;
-import md.ecosort.ecosort.repository.CategorieRepository;
-import md.ecosort.ecosort.repository.InregistrareRepository;
-import md.ecosort.ecosort.repository.ObiectivRepository;
-import md.ecosort.ecosort.repository.PunctRepository;
+import md.ecosort.ecosort.model.*;
+import md.ecosort.ecosort.repository.*;
 import md.ecosort.ecosort.session.Sesiune;
 
 import java.math.BigDecimal;
@@ -48,6 +41,7 @@ public class ColectareService {
     private final PunctRepository puncte = new PunctRepository();
     private final InregistrareRepository inregistrari = new InregistrareRepository();
     private final ObiectivRepository obiective = new ObiectivRepository();
+    private final StareCosRepository stare = new StareCosRepository();
 
     // ---------- Categorii ----------
 
@@ -94,6 +88,24 @@ public class ColectareService {
     public void stergePunct(int id) {
         Sesiune.cereAdmin();
         puncte.sterge(id);
+    }
+
+    // ----------- Stare Cos ------------
+    public List<StareCos> stareCosuri() {
+        Sesiune.curent();
+        return stare.lista();
+    }
+
+    public void leagaSenzor(PunctColectare punct, String cod, int canal, BigDecimal capacitateKg,
+                            int goalaMm, int plinaMm) {
+        Sesiune.cereAdmin();
+        stare.leaga(punct.id(), Validari.text(cod, "Codul dispozitivului", 40), canal,
+                Validari.cantitate(capacitateKg, false), goalaMm, plinaMm);
+    }
+
+    public void dezleagaSenzor(PunctColectare punct) {
+        Sesiune.cereAdmin();
+        stare.dezleaga(punct.id());
     }
 
     // ---------- Înregistrări ----------

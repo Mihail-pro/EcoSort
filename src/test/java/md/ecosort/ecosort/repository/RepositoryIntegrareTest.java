@@ -54,6 +54,7 @@ class RepositoryIntegrareTest {
         assertEquals(lista.size(), inregistrari.totaluriPeCategorii(null, null, null).size());
         assertEquals(lista.size(), obiective.progres(YearMonth.now()).size());
         assertNotNull(inregistrari.lista(null, lista.get(0).id(), LocalDate.now().minusYears(1), LocalDate.now()));
+        assertNotNull(new StareCosRepository().lista());
     }
 
     @Test

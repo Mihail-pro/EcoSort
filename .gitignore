@@ -46,3 +46,4 @@ build/
 .DS_Store
 ### Configurare locală (credențiale) ###
 .env
+firmware/**/secrets.h

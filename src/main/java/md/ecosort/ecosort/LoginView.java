@@ -15,6 +15,10 @@ import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 import md.ecosort.ecosort.model.Utilizator;
 import md.ecosort.ecosort.service.AuthService;
+import javafx.animation.AnimationTimer;
+import javafx.scene.CacheHint;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -29,6 +33,9 @@ public class LoginView extends StackPane {
     private PasswordField txtParola = new PasswordField();
     private Label lblEroare = new Label();
     private VBox card = new VBox(8);
+    private final List<Animation> animatiiFundal = new ArrayList<>();
+    private Pane fundalAnimat;
+    private boolean fundalSimplificat = false;
 
     // Câmpuri afișate doar la prima pornire, când trebuie creat primul administrator
     private final TextField txtNume = new TextField();
@@ -114,7 +121,18 @@ public class LoginView extends StackPane {
         );
 
         // Fundalul animat merge primul (în spate), cardul deasupra
-        getChildren().addAll(creeazaFundalAnimat(), card);
+        fundalAnimat = creeazaFundalAnimat();
+        getChildren().addAll(fundalAnimat, creeazaUmbra(), card);
+
+        // Animațiile rulează doar cât pagina e pe ecran: după login se opresc.
+        sceneProperty().addListener((obs, veche, noua) -> {
+            if (noua == null) {
+                animatiiFundal.forEach(Animation::stop);
+            } else if (!fundalSimplificat) {
+                animatiiFundal.forEach(Animation::play);
+                masoaraFluiditatea();
+            }
+        });
 
         aparitieCard();
         verificaConfigurare();
@@ -166,7 +184,7 @@ public class LoginView extends StackPane {
             mutare.setByX(-60 + Math.random() * 120);
             mutare.setAutoReverse(true);
             mutare.setCycleCount(Animation.INDEFINITE);
-            mutare.play();
+            animatiiFundal.add(mutare);
 
             fundal.getChildren().add(c);
         }
@@ -267,6 +285,53 @@ public class LoginView extends StackPane {
             txtConfirmare.clear();
             eroare(mesaj);
         });
+    }
+
+    // Umbra cardului ca nod separat și static: se calculează o dată (cache), apoi e doar copiată.
+    private Region creeazaUmbra() {
+        Region umbra = new Region();
+        umbra.setMouseTransparent(true);
+        umbra.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(20), null)));
+        umbra.setEffect(new DropShadow(30, Color.rgb(0, 0, 0, 0.4)));
+        umbra.setCache(true);
+        umbra.setCacheHint(CacheHint.SPEED);
+        umbra.maxWidthProperty().bind(card.widthProperty());
+        umbra.maxHeightProperty().bind(card.heightProperty());
+        umbra.translateXProperty().bind(card.translateXProperty());
+        umbra.translateYProperty().bind(card.translateYProperty());
+        umbra.opacityProperty().bind(card.opacityProperty());
+        return umbra;
+    }
+
+    // Măsoară cadrele/secundă reale; sub 40 oprește animația de fundal (calculatoare slabe, fără GPU).
+    private void masoaraFluiditatea() {
+        new AnimationTimer() {
+            private long t0 = 0, start = 0;
+            private int cadre = 0;
+
+            @Override
+            public void handle(long now) {
+                if (getScene() == null) { stop(); return; }
+                if (t0 == 0) t0 = now;
+                if (now - t0 < 1_000_000_000L) return;      // prima secundă: încălzire, fade-in
+                if (start == 0) start = now;
+                cadre++;
+                long durata = now - start;
+                if (durata >= 3_000_000_000L) {
+                    stop();
+                    double fps = cadre * 1e9 / durata;
+                    System.err.printf("Login: %.0f cadre/s%n", fps);
+                    if (fps < 40) simplifica();
+                }
+            }
+        }.start();
+    }
+
+    private void simplifica() {
+        System.err.println("Animația de fundal a fost oprită (fluiditate scăzută).");
+        fundalSimplificat = true;
+        animatiiFundal.forEach(Animation::stop);
+        getChildren().remove(fundalAnimat);
     }
 
     private void eroare(String mesaj) {

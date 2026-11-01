@@ -44,9 +44,11 @@ Rulați cu un cont care poate crea baze de date și utilizatori (de ex. `root`):
 | 5 | `03_procedures/puncte.sql` | CRUD puncte de colectare |
 | 6 | `03_procedures/inregistrari.sql` | CRUD + filtrare înregistrări |
 | 7 | `03_procedures/obiective.sql` | Obiective lunare |
-| 8 | `03_procedures/rapoarte.sql` | Totaluri și progres lunar |
-| 9 | `04_seed.sql` | *(opțional)* categorii și coșuri demonstrative |
-| 10 | `05_app_user.sql` | Contul `ecosort_app` (doar `EXECUTE`) |
+| 8 | `03_procedures/masuratori.sql` | CRUD senzori și măsurători |
+| 9 | `06_iot_schema.sql` | Dispozitive, Senzorii coșului și Istoricul măsurătorilor |
+| 10 | `03_procedures/rapoarte.sql` | Totaluri și progres lunar |
+| 11 | `04_seed.sql` | *(opțional)* categorii și coșuri demonstrative |
+| 12 | `05_app_user.sql` | Contul `ecosort_app` (doar `EXECUTE`) |
 
 ### MySQL Workbench
 
@@ -75,6 +77,10 @@ Apoi completați `.env` din rădăcina proiectului cu `ECOSORT_DB_USER=ecosort_a
 utilizatori 1 ──< inregistrari_deseuri >── 1 categorii_deseuri 1 ──< obiective_lunare
                          │                         1
                          └──>0..1 puncte_colectare >┘
+```
+```
+puncte_colectare 1 ──── 0..1 senzori_cos >──── 1 dispozitive
+puncte_colectare 1 ──< masuratori
 ```
 
 - `inregistrari_deseuri.punct_id` e opțional; la ștergerea punctului devine `NULL` (istoricul rămâne).
