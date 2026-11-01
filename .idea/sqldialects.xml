@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/database/01_schema.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/database/02_constraints_indexes.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/database/03_procedures/masuratori.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/database/06_iot_schema.sql" dialect="GenericSQL" />
+  </component>
+</project>
