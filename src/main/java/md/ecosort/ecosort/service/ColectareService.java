@@ -96,6 +96,18 @@ public class ColectareService {
         return stare.lista();
     }
 
+    public void leagaSenzor(PunctColectare punct, String cod, int canal, BigDecimal capacitateKg,
+                            int goalaMm, int plinaMm) {
+        Sesiune.cereAdmin();
+        stare.leaga(punct.id(), Validari.text(cod, "Codul dispozitivului", 40), canal,
+                Validari.cantitate(capacitateKg, false), goalaMm, plinaMm);
+    }
+
+    public void dezleagaSenzor(PunctColectare punct) {
+        Sesiune.cereAdmin();
+        stare.dezleaga(punct.id());
+    }
+
     // ---------- Înregistrări ----------
 
     public void inregistreaza(Categorie categorie, PunctColectare punct, BigDecimal cantitate, LocalDate data) {
