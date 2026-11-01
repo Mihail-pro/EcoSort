@@ -21,6 +21,7 @@
     for f in 01_schema.sql 02_constraints_indexes.sql \
              03_procedures/utilizatori.sql 03_procedures/categorii.sql 03_procedures/puncte.sql \
              03_procedures/inregistrari.sql 03_procedures/obiective.sql 03_procedures/rapoarte.sql \
+             06_iot_schema.sql 03_procedures/masuratori.sql \
              04_seed.sql; do
         echo "[EcoSort] $f"
         sql < "$f"

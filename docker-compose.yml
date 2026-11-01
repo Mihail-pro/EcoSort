@@ -19,7 +19,7 @@ services:
     command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_ai_ci"]
     ports:
       # Doar de pe acest calculator.
-      - "127.0.0.1:${ECOSORT_DB_PORT:-3306}:3306"
+      - "${ECOSORT_DB_BIND:-127.0.0.1}:${ECOSORT_DB_PORT:-3306}:3306"
     volumes:
       - ecosort-mysql:/var/lib/mysql
       - ./database:/ecosort-db:ro
