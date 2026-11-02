@@ -22,6 +22,7 @@ import md.ecosort.ecosort.model.Utilizator;
 import md.ecosort.ecosort.service.ColectareService;
 import md.ecosort.ecosort.service.ColectareService.Perioada;
 import md.ecosort.ecosort.service.UtilizatorService;
+import javafx.scene.shape.SVGPath;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -55,6 +56,15 @@ public class DashboardView extends BorderPane {
     private final Color VERDE = Color.web("#10b981");
     private final Color VERDE_INCHIS = Color.web("#065f46");
     private final Color VERDE_DESCHIS = Color.web("#f0fdf4");
+
+    private static final String SVG_HARTA = "M17.528 17.567q.659-.644.664-1.663q.006-.985-.658-1.646q-.665-.662-1.65-.662t-1.645.662t-.662 1.646t.662 1.646t1.645.662t1.644-.645m-1.643 1.645q-1.362 0-2.335-.973t-.973-2.335t.973-2.335t2.335-.973t2.334.973t.973 2.335q0 .556-.166 1.049t-.48.905l2.1 2.1q.14.14.15.344t-.13.344q-.141.16-.354.15q-.214-.01-.354-.15l-2.1-2.1q-.412.333-.905.5q-.493.165-1.068.165m-10.843.143q-.384.142-.713-.084T4 18.634V6.404q0-.268.13-.489t.378-.307l3.958-1.345q.267-.086.534-.086t.535.086L15 6.177l3.958-1.53q.384-.143.713.054t.329.588v5.48q0 .348-.323.498t-.61-.073q-.71-.488-1.514-.735q-.805-.247-1.668-.247h-.243q-.119 0-.242.011q-.373.03-.637-.183q-.263-.215-.263-.563V7.004l-5-1.746v11.544q0 .379-.215.687q-.214.307-.562.444z";
+    private static final String SVG_INREGISTRARE = "M13.75 2c-.69 0-1.25.56-1.25 1.25v2.5c0 .69.56 1.25 1.25 1.25h4C18.44 7 19 6.44 19 5.75v-2.5C19 2.56 18.44 2 17.75 2zm2.75 7.25a.75.75 0 0 0-1.5 0v6.69l-1.22-1.22a.75.75 0 1 0-1.06 1.06l2.5 2.5a.75.75 0 0 0 1.06 0l2.5-2.5a.75.75 0 1 0-1.06-1.06l-1.22 1.22zM6.25 13.5c-.69 0-1.25.56-1.25 1.25v2.5c0 .69.56 1.25 1.25 1.25h4c.69 0 1.25-.56 1.25-1.25v-2.5c0-.69-.56-1.25-1.25-1.25zM3.5 16.75a.75.75 0 0 0-1.5 0v2a2.75 2.75 0 0 0 2.75 2.75h14.5A2.75 2.75 0 0 0 22 18.75v-2a.75.75 0 0 0-1.5 0v2c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25z";
+    private static final String SVG_STATISTICI = "M0 13h16v2H0zm2-4h2v3H2zm3-4h2v7H5zm3 3h2v4H8zm3-6h2v10h-2z";
+    private static final String SVG_OBIECTIVE = "M4.358.877a8 8 0 0 1 4.47-.834a.75.75 0 0 1-.155 1.492a6.5 6.5 0 0 0-3.632.678l-.222.118A6.5 6.5 0 0 0 2.244 4.98l-.112.225a6.5 6.5 0 0 0 1.272 7.392l.18.174a6.5 6.5 0 0 0 3.314 1.636l.248.037a6.5 6.5 0 0 0 3.65-.576l.224-.112a6.5 6.5 0 0 0 3.445-6.43l.746-.077l.746-.078a8 8 0 0 1-4.24 7.913l-.276.138a8 8 0 0 1-4.492.709l-.306-.047a8 8 0 0 1-4.077-2.012l-.222-.214A8 8 0 0 1 .777 4.56l.139-.276a8 8 0 0 1 3.17-3.26zM12.22.22a.75.75 0 0 1 1.28.53V2.5h1.75l.112.01a.75.75 0 0 1 .491 1.186l-.073.085l-3 3a.75.75 0 0 1-.53.22h-.38a4 4 0 0 1 .11 1.404l-.044.305a4 4 0 0 1-2.982 3.175l-.303.062a4 4 0 0 1-2.111-.223l-.283-.123a4 4 0 0 1-1.597-1.4l-.16-.264a4 4 0 0 1-.477-2.371l.046-.306a4 4 0 0 1 .933-1.907l.213-.224a4 4 0 0 1 1.861-1.02l.076-.015a.75.75 0 0 1 .27 1.474l-.185.051a2.5 2.5 0 0 0-.978.587l-.133.139c-.3.338-.5.751-.583 1.192l-.029.192a2.5 2.5 0 0 0 .298 1.482l.1.165a2.5 2.5 0 0 0 .998.874l.177.078a2.5 2.5 0 0 0 1.32.14l.189-.04a2.5 2.5 0 0 0 1.864-1.984l.027-.19A2.5 2.5 0 0 0 10.29 7h-.23L8.53 8.53a.75.75 0 1 1-1.06-1.06L9 5.94V3.75c0-.199.079-.39.22-.53zm2.913 6.283a.75.75 0 0 1 .824.668l-1.492.155a.75.75 0 0 1 .668-.823M10.5 4.061V5.5h1.44l1.5-1.5H12V2.56z";
+    private static final String SVG_PROFIL = "M8 7a4 4 0 1 1 8 0a4 4 0 0 1-8 0m0 6a5 5 0 0 0-5 5a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3a5 5 0 0 0-5-5z";
+    private static final String SVG_CATEGORII = "M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1m10 0h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M10 13H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1m7 0a4 4 0 1 1-3.995 4.2L13 17l.005-.2A4 4 0 0 1 17 13";
+    private static final String SVG_UTILIZATORI = "M12 12.75c1.63 0 3.07.39 4.24.9c1.08.48 1.76 1.56 1.76 2.73V18H6v-1.61c0-1.18.68-2.26 1.76-2.73c1.17-.52 2.61-.91 4.24-.91M4 13c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2m1.13 1.1c-.37-.06-.74-.1-1.13-.1c-.99 0-1.93.21-2.78.58A2.01 2.01 0 0 0 0 16.43V18h4.5v-1.61c0-.83.23-1.61.63-2.29M20 13c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2m4 3.43c0-.81-.48-1.53-1.22-1.85A6.95 6.95 0 0 0 20 14c-.39 0-.76.04-1.13.1c.4.68.63 1.46.63 2.29V18H24zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3s-3-1.34-3-3s1.34-3 3-3";
+    private static final double DIMENSIUNE_ICON = 22;
 
     public DashboardView(Utilizator utilizator, Runnable laDeconectare) {
         this.utilizator = utilizator;
@@ -90,19 +100,19 @@ public class DashboardView extends BorderPane {
         sus.setPadding(new Insets(20, 30, 0, 30));
         setTop(sus);
 
-        Button btnHarta = butonMeniu("Hartă și Coșuri", () -> {
+        Button btnHarta = butonMeniu("Hartă și Coșuri", SVG_HARTA, () -> {
             harta.reincarcaPuncte();
             return paginaHarta;
         });
         VBox meniu = new VBox(8, btnHarta,
-                butonMeniu("Înregistrare deșeu", this::ecranInregistrare),
-                butonMeniu("Statistici", this::ecranStatistici),
-                butonMeniu("Obiective lunare", this::ecranObiective),
-                butonMeniu("Profil și Istoric", this::ecranProfil));
+                butonMeniu("Înregistrare deșeu", SVG_INREGISTRARE, this::ecranInregistrare),
+                butonMeniu("Statistici", SVG_STATISTICI, this::ecranStatistici),
+                butonMeniu("Obiective lunare", SVG_OBIECTIVE, this::ecranObiective),
+                butonMeniu("Profil și Istoric", SVG_PROFIL, this::ecranProfil));
         if (utilizator.esteAdmin()) {
             meniu.getChildren().addAll(
-                    butonMeniu("Categorii", this::ecranCategorii),
-                    butonMeniu("Utilizatori", this::ecranUtilizatori));
+                    butonMeniu("Categorii", SVG_CATEGORII, this::ecranCategorii),
+                    butonMeniu("Utilizatori", SVG_UTILIZATORI, this::ecranUtilizatori));
         }
         meniu.setPadding(new Insets(30, 0, 0, 25));
         meniu.setPrefWidth(230);
@@ -682,12 +692,14 @@ public class DashboardView extends BorderPane {
 
     // ===================== STIL (neschimbat) =====================
 
-    private Button butonMeniu(String text, Supplier<Node> ecran) {
+    private Button butonMeniu(String text, String svg, Supplier<Node> ecran) {
         Button b = new Button(text);
         b.setMaxWidth(Double.MAX_VALUE);
         b.setAlignment(Pos.CENTER_LEFT);
         b.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         b.setPadding(new Insets(12, 15, 12, 15));
+        b.setGraphicTextGap(12);
+        if (!svg.isBlank()) b.setGraphic(iconMeniu(b, svg));
         stilButonMeniu(b, false);
 
         b.setOnMouseEntered(e -> {
@@ -706,14 +718,26 @@ public class DashboardView extends BorderPane {
         return b;
     }
 
+    private Node iconMeniu(Button b, String d) {
+        SVGPath forma = new SVGPath();
+        forma.setContent(d);
+        double scara = DIMENSIUNE_ICON / 24.0;
+        forma.setScaleX(scara);
+        forma.setScaleY(scara);
+
+        StackPane cadru = new StackPane(forma);
+        cadru.setMinSize(24, 24);
+        cadru.setPrefSize(24, 24);
+        cadru.setMaxSize(24, 24);
+        b.getProperties().put("icon", forma);
+        return cadru;
+    }
+
     private void stilButonMeniu(Button b, boolean activ) {
-        if (activ) {
-            b.setBackground(fundal(Color.WHITE, 10));
-            b.setTextFill(VERDE_INCHIS);
-        } else {
-            b.setBackground(fundal(Color.TRANSPARENT, 10));
-            b.setTextFill(Color.WHITE);
-        }
+        Color culoareText = activ ? VERDE_INCHIS : Color.WHITE;
+        b.setBackground(fundal(activ ? Color.WHITE : Color.TRANSPARENT, 10));
+        b.setTextFill(culoareText);
+        if (b.getProperties().get("icon") instanceof SVGPath icon) icon.setFill(culoareText);
     }
 
     private Background fundal(Color culoare, double raza) {
