@@ -131,18 +131,7 @@ public class DashboardView extends BorderPane {
         zonaHarta.setClip(taiere);
         VBox.setVgrow(zonaHarta, Priority.ALWAYS);
 
-        HBox legenda = new HBox(25);
-        legenda.setAlignment(Pos.CENTER);
-        incarca(service::categorii, categorii -> {
-            for (Categorie categorie : categorii) {
-                Circle cerc = new Circle(7, culoare(categorie));
-                HBox element = new HBox(6, cerc, new Label(categorie.denumire()));
-                element.setAlignment(Pos.CENTER_LEFT);
-                legenda.getChildren().add(element);
-            }
-        });
-
-        ecran.getChildren().addAll(zonaHarta, legenda);
+        ecran.getChildren().add(zonaHarta);
         return ecran;
     }
 
